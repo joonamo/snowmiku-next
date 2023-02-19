@@ -34,7 +34,7 @@ export const paginatorRegex = /new Paginator\('_paginator', ([0-9]*)/
 const pageCount = (page?: string) => Number((page && paginatorRegex.exec(page)?.[1]) ?? 1)
 
 export const processPage = async (year: string, orderTag: string, page = 1): Promise<ResultsPage> => {    
-  const cacheKey = `page-result-${year}-${orderTag}-${page}`
+  const cacheKey = `page-result/${year}/${orderTag}/${page}`
   const cached = await getCached<ResultsPage>(cacheKey)
   if (cached) {
     return cached
