@@ -1,4 +1,5 @@
 import JSSoup, { SoupTag } from 'jssoup'
+import { getCached, storeCache } from './cache'
 
 export interface MikuResult {
   name: string
@@ -32,7 +33,13 @@ const imageLink = (styleAttr: string) => {
 export const paginatorRegex = /new Paginator\('_paginator', ([0-9]*)/
 const pageCount = (page?: string) => Number((page && paginatorRegex.exec(page)?.[1]) ?? 1)
 
-export const processPage = async (year: string, orderTag: string, page = 1): Promise<ResultsPage> => {  
+export const processPage = async (year: string, orderTag: string, page = 1): Promise<ResultsPage> => {    
+  const cacheKey = `page-result-${year}-${orderTag}-${page}`
+  const cached = await getCached<ResultsPage>(cacheKey)
+  if (cached) {
+    return cached
+  }
+  
   const yearTag = getYearTag(year)
   const piaproUrl = `https://piapro.jp/content_list/?view=image&tag=${yearTag}%E5%B9%B4%E9%9B%AA%E3%83%9F%E3%82%AF%E8%A1%A3%E8%A3%85&order=${orderTag}&page=${page}`
   
@@ -55,10 +62,14 @@ export const processPage = async (year: string, orderTag: string, page = 1): Pro
     }
   })
   
-  return {
+  const result = {
     pageCount: pageCount(mikuHtml),
     results
   }
+
+  await storeCache(cacheKey, result, 5 * 60 * 1000)
+
+  return result
 }
 
 export const getLatestYear = async (): Promise<number> => {
