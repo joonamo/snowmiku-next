@@ -40,6 +40,7 @@ export const getCached = async <T>(key: string): Promise<T | undefined> => {
     return cachedObject.data
   }
 
+  console.log(`Stale data from cache for "${key}"`)
   return undefined
 }
 
