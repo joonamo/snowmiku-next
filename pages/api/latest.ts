@@ -3,6 +3,7 @@ import { runCors } from '@/src/cors'
 import { latestTag, processPage } from '@/src/miku-scrape'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -11,5 +12,7 @@ export default async function handler(
 
   const year = String(req.query?.['year'] ?? '2020')
   const page = Number(req.query?.['page'] ?? 1)
+  
+  res.setHeader('Cache-Control', `public, s-maxage=${5 * 60}, stale-while-revalidate=${10 * 60}`)
   res.json(await processPage(year, latestTag, page))
 }
