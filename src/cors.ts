@@ -15,7 +15,7 @@ export function runCors(
   cors = defaultCors
 ) {
   return new Promise((resolve, reject) => {
-    cors(req, res, (result: any) => {
+    cors(req, res, (result: unknown) => {
       if (result instanceof Error) {
         return reject(result)
       }
