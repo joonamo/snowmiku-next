@@ -33,10 +33,10 @@ const imageLink = (styleAttr: string) => {
 export const paginatorRegex = /new Paginator\('_paginator', ([0-9]*)/
 const pageCount = (page?: string) => Number((page && paginatorRegex.exec(page)?.[1]) ?? 1)
 
-export const processPage = (year: string, orderTag: string, page = 1): ResultsPage => {
+export const processPage = async (year: string, orderTag: string, page = 1): Promise<ResultsPage> => {  
   const yearTag = getYearTag(year)
   const piaproUrl = `https://piapro.jp/content_list/?view=image&tag=${yearTag}%E5%B9%B4%E9%9B%AA%E3%83%9F%E3%82%AF%E8%A1%A3%E8%A3%85&order=${orderTag}&page=${page}`
-  
+
   const soup = new JSSoup(example)
   const images = soup.findAll('div', 'i_main')
 
@@ -56,4 +56,15 @@ export const processPage = (year: string, orderTag: string, page = 1): ResultsPa
     pageCount: pageCount(example),
     results
   }
+}
+
+export const getLatestYear = async (): Promise<number> => {
+  const maxYear = new Date().getFullYear() + 1
+  const promises = []
+  for (let year = maxYear; year >= 2023; year--) {
+    promises.push(processPage(year.toString(), latestTag))
+  }
+
+  const results = await Promise.all(promises)
+  return maxYear - results.findIndex(result => result.results.length != 0)
 }
