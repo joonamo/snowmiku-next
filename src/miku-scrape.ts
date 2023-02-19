@@ -1,5 +1,4 @@
 import JSSoup, { SoupTag } from 'jssoup'
-import { example } from './example'
 
 export interface MikuResult {
   name: string
@@ -36,8 +35,12 @@ const pageCount = (page?: string) => Number((page && paginatorRegex.exec(page)?.
 export const processPage = async (year: string, orderTag: string, page = 1): Promise<ResultsPage> => {  
   const yearTag = getYearTag(year)
   const piaproUrl = `https://piapro.jp/content_list/?view=image&tag=${yearTag}%E5%B9%B4%E9%9B%AA%E3%83%9F%E3%82%AF%E8%A1%A3%E8%A3%85&order=${orderTag}&page=${page}`
-
-  const soup = new JSSoup(example)
+  
+  console.log(piaproUrl)
+  const mikuReq = await fetch(piaproUrl)
+  console.log(`got response, status ${mikuReq.status} ${mikuReq.ok}`)
+  const mikuHtml = await mikuReq.text()
+  const soup = new JSSoup(mikuHtml)
   const images = soup.findAll('div', 'i_main')
 
   const results = images.map((item: SoupTag) => {
@@ -53,7 +56,7 @@ export const processPage = async (year: string, orderTag: string, page = 1): Pro
   })
   
   return {
-    pageCount: pageCount(example),
+    pageCount: pageCount(mikuHtml),
     results
   }
 }
