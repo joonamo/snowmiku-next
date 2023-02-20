@@ -29,7 +29,7 @@ export const getStaticPropsBase: GetStaticProps<AppProps, YearQuery> = async (qu
   const viewMode = 
     query.params?.viewMode === 'Latest' ? 'Latest' :
     query.params?.viewMode === 'Popular' ? 'Popular' :
-    defaultViewMode
+    year === configuration.latestYear ? defaultViewMode : 'Popular'
 
   const { pageCount, results } = await processPage(String(year), viewMode === 'Latest' ? latestTag : popularTag, currentPage)
 
