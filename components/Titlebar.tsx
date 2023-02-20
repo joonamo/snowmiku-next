@@ -3,6 +3,7 @@ import ClassNames from "classnames"
 import Link from "next/link"
 import * as React from "react"
 import { Configuration, ViewMode } from "./App"
+import { ExternalLink } from "./ExternalLink"
 import { Logo } from "./logo"
 
 interface TitlebarProps {
@@ -152,7 +153,7 @@ export const Titlebar: React.FunctionComponent<TitlebarProps> = ({
           >
             <span>Official Design Contest page</span>
             <span className="icon">
-              <i className="fas fa-external-link-alt" />
+              <ExternalLink />
             </span>
           </a>
 
@@ -163,7 +164,7 @@ export const Titlebar: React.FunctionComponent<TitlebarProps> = ({
           >
             <span>SnowMiku.com</span>
             <span className="icon">
-              <i className="fas fa-external-link-alt" />
+              <ExternalLink />
             </span>
           </a>
         </div>

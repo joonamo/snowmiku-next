@@ -1,3 +1,4 @@
+import Head from "next/head"
 import { useRouter } from "next/router"
 import * as React from "react"
 
@@ -30,6 +31,7 @@ export interface AppProps {
   pageCount: number
   configuration: Configuration | null
   isLoading?: boolean
+  generatedAt?: string
 }
 
 export const App: React.FC<Partial<AppProps>> = (props) => {
@@ -73,17 +75,25 @@ const MikuPage: React.FunctionComponent<AppProps> = ({
   configuration,
   isLoading
 }) => {  
+  const title = `Snow Miku ${year ?? ""}`
   return (
     <>
-      {/* <Helmet>
-        <title>Snow Miku {appViewModel.year ?? ""}</title>
+      <Head>
+        <title>{title}</title>
         <meta
           name="description"
           content={`Browse Snow Miku ${
-            appViewModel.year ?? ""
+            year ?? ""
           } design competition entries in high resolution gallery`}
         />
-      </Helmet> */}
+
+        <link rel="icon" type="image/png" href="favicon.png" />
+
+        <meta property="og:title" content={title} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://snowmiku.net" />
+        <meta property="og:image" content="logo.png" />
+      </Head>
       <Titlebar
         viewMode={viewMode}
         year={year}
