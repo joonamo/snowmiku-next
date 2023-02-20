@@ -1,4 +1,4 @@
-import { getLatestYear, latestTag, processPage } from '@/src/miku-scrape'
+import { getLatestYear, latestTag, popularTag, processPage } from '@/src/miku-scrape'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { AppProps, ViewMode } from '@/components/App'
 import { ParsedUrlQuery } from 'querystring'
@@ -18,12 +18,13 @@ export const getStaticPropsBase: GetStaticProps<AppProps, YearQuery> = async (qu
 
   const year = query.params?.year ?? configuration.latestYear
   const currentPage = Number(query.params?.page ?? 1)
+  console.log(query.params?.viewMode)
   const viewMode = 
     query.params?.viewMode === 'Latest' ? 'Latest' :
     query.params?.viewMode === 'Popular' ? 'Popular' :
     defaultViewMode
 
-  const { pageCount, results } = await processPage(String(year), latestTag, currentPage)
+  const { pageCount, results } = await processPage(String(year), viewMode === 'Latest' ? latestTag : popularTag, currentPage)
 
   const props: AppProps = {
     configuration,
