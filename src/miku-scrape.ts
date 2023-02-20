@@ -6,7 +6,7 @@ export interface MikuResult {
   author: string
   link: string
   image: string
-  authorIcon: string
+  authorIcon?: string
   piaproUrl?: string
 }
 
@@ -55,7 +55,7 @@ export const processPage = async (year: string, orderTag: string, page = 1): Pro
     return {
       name: item.find(undefined, 'thumb_over').text,
       author: item.find(undefined, 'i_title').text,
-      authorIcon: item.find(undefined, 'i_icon')?.find('img').attrs['href'],
+      authorIcon: item.find(undefined, 'i_icon')?.find('img').attrs['href'] ?? null,
       image: imageLink(linkElem.attrs['style']),
       link: `https://piapro.jp${linkElem.attrs['href']}`,
       piaproUrl

@@ -14,7 +14,7 @@ export interface ImageInfo {
   author: string
   link: string
   image: string
-  authorIcon: string
+  authorIcon?: string
 }
 
 export interface Configuration {
