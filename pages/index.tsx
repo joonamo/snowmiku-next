@@ -1,6 +1,7 @@
 import { getLatestYear, latestTag, processPage } from '@/src/miku-scrape'
 import { GetStaticProps } from 'next'
 import { App, AppProps } from '@/components/App'
+import { defaultViewMode } from '@/components/staticConfig'
 
 export default App
 
@@ -20,13 +21,13 @@ export const getStaticProps: GetStaticProps<AppProps> = async () => {
     currentPage: 1,
     imagesInfos: results,
     pageCount,
-    viewMode: 'Latest',
+    viewMode: defaultViewMode,
     year: String(year),
     generatedAt: new Date().toISOString()
   }
 
   return {
     props,
-    revalidate: 5 * 60,
+    revalidate: 5,
   }
 }
