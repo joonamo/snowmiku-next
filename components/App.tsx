@@ -3,8 +3,8 @@ import { useRouter } from "next/router"
 import * as React from "react"
 
 import { Disclaimer } from "./Disclaimer"
-import { Loading } from "./Loading"
 import { Paginator } from "./Paginator"
+import { ResultsSkeleton } from "./SkeletonResults"
 import { defaultViewMode } from "./staticConfig"
 import { Titlebar } from "./Titlebar"
 
@@ -63,6 +63,7 @@ export const App: React.FC<Partial<AppProps>> = (props) => {
     pageCount={props.pageCount ?? 1}
     viewMode={props.viewMode ?? defaultViewMode}
     year={props.year ?? null}
+    generatedAt={props.generatedAt}
   />
 }
 
@@ -73,7 +74,8 @@ const MikuPage: React.FunctionComponent<AppProps> = ({
   currentPage,
   pageCount,
   configuration,
-  isLoading
+  isLoading,
+  generatedAt
 }) => {  
   const title = `Snow Miku ${year ?? ""}`
   return (
@@ -115,7 +117,7 @@ const MikuPage: React.FunctionComponent<AppProps> = ({
               viewMode={viewMode}
             />
             {!configuration || isLoading ? (
-              <Loading key="loader" />
+              <ResultsSkeleton />
             ) : (
               <>
                 <Results results={imagesInfos} />
@@ -133,7 +135,7 @@ const MikuPage: React.FunctionComponent<AppProps> = ({
       </section>
       <section className="section">
         <div className="container">
-          <Disclaimer />
+          <Disclaimer generatedAt={generatedAt} />
         </div>
       </section>
     </>

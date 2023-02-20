@@ -21,7 +21,8 @@ export const getStaticProps: GetStaticProps<AppProps> = async () => {
     imagesInfos: results,
     pageCount,
     viewMode: 'Latest',
-    year: String(year)
+    year: String(year),
+    generatedAt: new Date().toISOString()
   }
 
   return {

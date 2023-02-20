@@ -1,6 +1,6 @@
 import * as React from "react"
 
-export const Disclaimer = () => (
+export const Disclaimer: React.FC<{generatedAt?: string}> = ({generatedAt}) => (
   <div className="card">
     <div className="card-content">
       <p>
@@ -10,6 +10,8 @@ export const Disclaimer = () => (
         SnowMiku.net is not affiliated or endorsed by Piapro.jp or Crypton
         Future Media Inc.
       </p>
+
+      { generatedAt && <p>Generated at {generatedAt}</p> }
     </div>
   </div>
 )

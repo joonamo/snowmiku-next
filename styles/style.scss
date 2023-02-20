@@ -38,3 +38,23 @@
 .fit-contain {
   object-fit: contain;
 }
+
+.skeleton {
+  background-color: #e2e2e2;
+  animation: loading 1s infinite alternate;
+  border-radius: 10px;
+}
+
+@keyframes loading {
+  from {
+    background-color: hsl(200, 100%, 97%);;
+  }
+
+  to {
+    background-color: hsl(204, 38%, 95%);
+  }
+}
+
+.is-circle {
+  border-radius: 100%;
+}

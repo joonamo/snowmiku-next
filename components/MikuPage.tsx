@@ -31,7 +31,8 @@ export const getStaticPropsBase: GetStaticProps<AppProps, YearQuery> = async (qu
     imagesInfos: results,
     pageCount,
     viewMode,
-    year: String(year)
+    year: String(year),
+    generatedAt: new Date().toISOString()
   }
 
   return {
