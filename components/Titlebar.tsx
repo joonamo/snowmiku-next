@@ -2,7 +2,7 @@
 import ClassNames from "classnames"
 import Link from "next/link"
 import * as React from "react"
-import { ViewMode, Configuration } from "./AppViewModel"
+import { Configuration, ViewMode } from "./App"
 import { Logo } from "./logo"
 
 interface TitlebarProps {
