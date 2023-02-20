@@ -16,9 +16,16 @@ export const getStaticPropsBase: GetStaticProps<AppProps, YearQuery> = async (qu
     latestYear: await getLatestYear()
   }
 
-  const year = query.params?.year ?? configuration.latestYear
-  const currentPage = Number(query.params?.page ?? 1)
-  console.log(query.params?.viewMode)
+  const yearParsed = query.params?.year && Number.parseInt(query.params?.year, 10)
+  const year = 
+    yearParsed && 
+    Number.isFinite(yearParsed) && 
+    yearParsed <= configuration.latestYear + 1 &&
+    yearParsed >= configuration.firstYear
+      ? yearParsed 
+      : configuration.latestYear
+  const currentPageParsed = query.params?.page && Number.parseInt(query.params?.page, 10)
+  const currentPage = currentPageParsed && Number.isFinite(currentPageParsed) ? currentPageParsed : 1
   const viewMode = 
     query.params?.viewMode === 'Latest' ? 'Latest' :
     query.params?.viewMode === 'Popular' ? 'Popular' :
