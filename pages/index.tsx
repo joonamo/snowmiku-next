@@ -28,6 +28,6 @@ export const getStaticProps: GetStaticProps<AppProps> = async () => {
 
   return {
     props,
-    revalidate: 5,
+    revalidate: 5 * 60,
   }
 }

@@ -10,7 +10,13 @@ interface YearQuery extends ParsedUrlQuery {
   page?: string
 }
 
+const yearRe = /^20\d\d$/
+
 export const getStaticPropsBase: GetStaticProps<AppProps, YearQuery> = async (query) => {
+  if (!yearRe.test(query.params?.year ?? "")) {
+    return { notFound: true } 
+  }
+  
   const configuration = {
     firstYear: 2012,
     latestYear: await getLatestYear()
