@@ -73,6 +73,12 @@ export const processPage = async (year: string, orderTag: string, page = 1): Pro
 }
 
 export const getLatestYear = async (): Promise<number> => {
+  const cacheKey = "latestYear"
+  const cached = await getCached<{latestYear: number}>(cacheKey)
+  if (cached) {
+    return cached.latestYear
+  }
+
   const maxYear = new Date().getFullYear() + 1
   const promises = []
   for (let year = maxYear; year >= 2023; year--) {
@@ -80,5 +86,8 @@ export const getLatestYear = async (): Promise<number> => {
   }
 
   const results = await Promise.all(promises)
-  return maxYear - results.findIndex(result => result.results.length != 0)
+  const latestYear = maxYear - results.findIndex(result => result.results.length != 0)
+  await storeCache(cacheKey, { latestYear }, 60 * 60 * 1000)
+
+  return latestYear
 }
