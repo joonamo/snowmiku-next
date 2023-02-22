@@ -90,7 +90,7 @@ const LastPage: React.FunctionComponent<PageLinkProps> = ({
   return currentPage > pageCount - 2 ? (
     <></>
   ) : (
-    <PageLink page={pageCount} pagePrefix={pagePrefix} isLastPage />
+    <PageLink page={pageCount} pagePrefix={pagePrefix} />
   )
 }
 
@@ -104,7 +104,6 @@ const PageLink: React.FunctionComponent<ActualPageLinkProps> = ({
   isActivePage,
   pagePrefix,
   page,
-  isLastPage,
 }) => (
   <li>
     <Link
@@ -114,7 +113,6 @@ const PageLink: React.FunctionComponent<ActualPageLinkProps> = ({
       })}
       key={`paginator_${page}`}
       href={`${pagePrefix}/${page}`}
-      prefetch={!isLastPage}
     >
       {page}
     </Link>

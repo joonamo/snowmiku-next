@@ -1,14 +1,14 @@
-import Head from "next/head"
-import { useRouter } from "next/router"
-import * as React from "react"
+import Head from 'next/head'
+import { useRouter } from 'next/router'
+import * as React from 'react'
 
-import { Disclaimer } from "./Disclaimer"
-import { Paginator } from "./Paginator"
-import { ResultsSkeleton } from "./SkeletonResults"
-import { defaultViewMode } from "./staticConfig"
-import { Titlebar } from "./Titlebar"
+import { Disclaimer } from './Disclaimer'
+import { Paginator } from './Paginator'
+import { ResultsSkeleton } from './SkeletonResults'
+import { defaultViewMode } from './staticConfig'
+import { Titlebar } from './Titlebar'
 
-export type ViewMode = "Latest" | "Popular"
+export type ViewMode = 'Latest' | 'Popular'
 
 export interface ImageInfo {
   name: string
@@ -36,12 +36,12 @@ export interface AppProps {
 
 export const App: React.FC<Partial<AppProps>> = (props) => {
   const router = useRouter()
-  
+
   const [loading, setLoading] = React.useState(false)
 
   React.useEffect(() => {
-    const handleStart = () => setLoading(true);
-    const handleComplete = () => setLoading(false);
+    const handleStart = () => setLoading(true)
+    const handleComplete = () => setLoading(false)
 
     router.events.on('routeChangeStart', handleStart)
     router.events.on('routeChangeComplete', handleComplete)
@@ -54,17 +54,18 @@ export const App: React.FC<Partial<AppProps>> = (props) => {
     }
   })
 
-
-  return <MikuPage 
-    configuration={props.configuration ?? null}
-    currentPage={props.currentPage ?? 1}
-    imagesInfos={props.imagesInfos ?? []}
-    isLoading={router.isFallback || loading}
-    pageCount={props.pageCount ?? 1}
-    viewMode={props.viewMode ?? defaultViewMode}
-    year={props.year ?? null}
-    generatedAt={props.generatedAt}
-  />
+  return (
+    <MikuPage
+      configuration={props.configuration ?? null}
+      currentPage={props.currentPage ?? 1}
+      imagesInfos={props.imagesInfos ?? []}
+      isLoading={router.isFallback || loading}
+      pageCount={props.pageCount ?? 1}
+      viewMode={props.viewMode ?? defaultViewMode}
+      year={props.year ?? null}
+      generatedAt={props.generatedAt}
+    />
+  )
 }
 
 const MikuPage: React.FunctionComponent<AppProps> = ({
@@ -75,44 +76,38 @@ const MikuPage: React.FunctionComponent<AppProps> = ({
   pageCount,
   configuration,
   isLoading,
-  generatedAt
-}) => {  
-  const title = `Snow Miku ${year ?? ""}`
+  generatedAt,
+}) => {
+  const title = `Snow Miku ${year ?? ''}`
   return (
     <>
       <Head>
         <title>{title}</title>
         <meta
-          name="description"
+          name='description'
           content={`Browse Snow Miku ${
-            year ?? ""
+            year ?? ''
           } design competition entries in high resolution gallery`}
         />
 
-        <link rel="icon" type="image/png" href="favicon.png" />
+        <link rel='icon' type='image/png' href='/favicon.png' />
 
-        <meta property="og:title" content={title} />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://snowmiku.net" />
-        <meta property="og:image" content="logo.png" />
+        <meta property='og:title' content={title} />
+        <meta property='og:type' content='website' />
+        <meta property='og:url' content='https://snowmiku.net' />
+        <meta property='og:image' content='logo.png' />
       </Head>
-      <Titlebar
-        viewMode={viewMode}
-        year={year}
-        configuration={configuration}
-      />
-      <section className="section">
-        <div className="container">
-          <h2 className="title">
-            {viewMode === "Popular"
-              ? "Most Popular Entries"
-              : "Latest Entries"}
+      <Titlebar viewMode={viewMode} year={year} configuration={configuration} />
+      <section className='section'>
+        <div className='container'>
+          <h2 className='title'>
+            {viewMode === 'Popular' ? 'Most Popular Entries' : 'Latest Entries'}
           </h2>
           <div>
             <Paginator
               currentPage={currentPage}
               pageCount={pageCount}
-              key="head-paginator"
+              key='head-paginator'
               year={year}
               viewMode={viewMode}
             />
@@ -124,7 +119,7 @@ const MikuPage: React.FunctionComponent<AppProps> = ({
                 <Paginator
                   currentPage={currentPage}
                   pageCount={pageCount}
-                  key="footer-paginator"
+                  key='footer-paginator'
                   year={year}
                   viewMode={viewMode}
                 />
@@ -133,8 +128,8 @@ const MikuPage: React.FunctionComponent<AppProps> = ({
           </div>
         </div>
       </section>
-      <section className="section">
-        <div className="container">
+      <section className='section'>
+        <div className='container'>
           <Disclaimer generatedAt={generatedAt} />
         </div>
       </section>
@@ -152,10 +147,7 @@ const Results: React.FunctionComponent<ResultsProps> = (props) => {
 
   return _1 ? (
     <>
-      <div
-        className="tile is-ancestor is-horizontal"
-        key={`parent-tile-${depth}`}
-      >
+      <div className='tile is-ancestor is-horizontal' key={`parent-tile-${depth}`}>
         {[_1, _2].map((r, i) => (
           <Result result={r} depth={depth} key={`${depth}-${i}`} />
         ))}
@@ -171,32 +163,34 @@ interface ResultProps {
 }
 const Result: React.FunctionComponent<ResultProps> = ({ result, depth }) => {
   return result ? (
-    <div className="tile is-parent" key={result.link}>
-      <div className="tile is-child card" key={result.link}>
-        <a href={result.link} target="blank">
-          <div className="card-image">
-            <figure className="image is-16by9">
+    <div className='tile is-parent' key={result.link}>
+      <div className='tile is-child card' key={result.link}>
+        <a href={result.link} target='blank'>
+          <div className='card-image'>
+            <figure className='image is-16by9'>
               <img
-                className="fit-contain"
+                className='fit-contain'
                 src={result.image}
-                loading={depth === 0 ? "eager" : "lazy"}
+                loading={depth === 0 ? 'eager' : 'lazy'}
+                alt={`${result.name} by ${result.author}`}
               />
             </figure>
           </div>
-          <div className="card-content">
-            <div className="media">
-              <div className="media-left">
-                <figure className="image is-48x48">
+          <div className='card-content'>
+            <div className='media'>
+              <div className='media-left'>
+                <figure className='image is-48x48'>
                   <img
-                    className="is-rounded"
+                    className='is-rounded'
                     src={result.authorIcon}
-                    loading="lazy"
+                    loading='lazy'
+                    alt={`Avatar of ${result.author}`}
                   />
                 </figure>
               </div>
-              <div className="media-content">
-                <p className="title is-5">{result.name}</p>
-                <p className="subtitle is-5">{result.author}</p>
+              <div className='media-content'>
+                <p className='title is-5'>{result.name}</p>
+                <p className='subtitle is-5'>{result.author}</p>
               </div>
             </div>
           </div>
