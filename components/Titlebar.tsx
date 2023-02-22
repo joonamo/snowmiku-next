@@ -139,7 +139,7 @@ export const Titlebar: React.FunctionComponent<TitlebarProps> = ({
           </div>
 
           <a
-            href='https://piapro.jp/pages/official_collabo/2023snowmiku_s5gnpkaj/index'
+            href='https://piapro.jp/pages/official_collabo/2024snowmiku_p7hemqu6/'
             target='blank'
             className='navbar-item'
           >
