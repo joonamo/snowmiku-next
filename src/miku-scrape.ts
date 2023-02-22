@@ -7,6 +7,8 @@ export interface MikuResult {
   author: string
   link: string
   image: string
+  views: number
+  postTime: string
   authorIcon?: string
 }
 
@@ -31,6 +33,18 @@ const imageLink = (styleAttr: string) => {
   return `https://${re?.[1]}0740_0500${re?.[2]}`
 }
 
+const viewsRegex = /閲覧数:([\d,]+)/
+const getViews = (html: string) => {
+  const re = viewsRegex.exec(html)
+  return (re && parseInt( re[1].replace(',', ''), 10)) ?? 0
+}
+
+const postTimeRegex = /(\d\d\d\d\/\d\d\/\d\d \d\d:\d\d)/ // Beautiful
+const getPostTime = (html: string) => {
+  const re = postTimeRegex.exec(html)
+  return re?.[1] ?? ""
+}
+
 export const paginatorRegex = /new Paginator\('_paginator', ([0-9]*)/
 const pageCount = (page?: string) => Number((page && paginatorRegex.exec(page)?.[1]) ?? 1)
 
@@ -39,7 +53,7 @@ export const processPage = async (
   orderTag: string,
   page = 1,
 ): Promise<ResultsPage> => {
-  const cacheKey = `page-result-v2/${year}/${orderTag}/${page}`
+  const cacheKey = `page-result-v3/${year}/${orderTag}/${page}`
   const cached = await getCached<ResultsPage>(cacheKey)
   if (cached.data) {
     return cached.data
@@ -55,13 +69,16 @@ export const processPage = async (
   const soup = new JSSoup(mikuHtml)
   const images = soup.findAll('div', 'i_main')
 
-  const results = images.map((item: SoupTag) => {
+  const results = images.map((item: SoupTag): MikuResult => {
     const linkElem: SoupTag = item.find(undefined, 'i_image')
+    const asString = item.toString()
     return {
       name: item.find(undefined, 'thumb_over').text,
       author: item.find(undefined, 'i_title').text,
       authorIcon: item.find(undefined, 'i_icon')?.find('img').attrs['src'] ?? null,
       image: imageLink(linkElem.attrs['style']),
+      views: getViews(asString),
+      postTime: getPostTime(asString),
       link: `https://piapro.jp${linkElem.attrs['href']}`,
     }
   })

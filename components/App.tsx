@@ -15,6 +15,8 @@ export interface ImageInfo {
   author: string
   link: string
   image: string
+  views: number
+  postTime: string
   authorIcon?: string
 }
 
@@ -190,7 +192,8 @@ const Result: React.FunctionComponent<ResultProps> = ({ result, depth }) => {
               </div>
               <div className='media-content'>
                 <p className='title is-5'>{result.name}</p>
-                <p className='subtitle is-5'>{result.author}</p>
+                <p className='subtitle is-5 mb-1'>{result.author}</p>
+                <p className='subtitle is-7'> {result.postTime} views {result.views.toLocaleString()}</p>
               </div>
             </div>
           </div>
