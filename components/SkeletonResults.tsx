@@ -16,18 +16,6 @@ export const ResultsSkeleton: React.FunctionComponent = () => (
       <ResultSkeleton />
       <ResultSkeleton />
     </div>
-    <div className='tile is-ancestor is-horizontal'>
-      <ResultSkeleton />
-      <ResultSkeleton />
-    </div>
-    <div className='tile is-ancestor is-horizontal'>
-      <ResultSkeleton />
-      <ResultSkeleton />
-    </div>
-    <div className='tile is-ancestor is-horizontal'>
-      <ResultSkeleton />
-      <ResultSkeleton />
-    </div>
   </>
 )
 

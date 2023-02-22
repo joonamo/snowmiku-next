@@ -116,20 +116,14 @@ const MikuPage: React.FunctionComponent<AppProps> = ({
               year={year}
               viewMode={viewMode}
             />
-            {!configuration || isLoading ? (
-              <ResultsSkeleton />
-            ) : (
-              <>
-                <Results results={imagesInfos} />
-                <Paginator
-                  currentPage={currentPage}
-                  pageCount={pageCount}
-                  key='footer-paginator'
-                  year={year}
-                  viewMode={viewMode}
-                />
-              </>
-            )}
+            {!configuration || isLoading ? <ResultsSkeleton /> : <Results results={imagesInfos} />}
+            <Paginator
+              currentPage={currentPage}
+              pageCount={pageCount}
+              key='footer-paginator'
+              year={year}
+              viewMode={viewMode}
+            />
           </div>
         </div>
       </section>
