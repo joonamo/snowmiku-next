@@ -34,6 +34,7 @@ export interface AppProps {
   configuration: Configuration | null
   isLoading?: boolean
   generatedAt?: string
+  overrideTitle?: string
 }
 
 export const App: React.FC<Partial<AppProps>> = (props) => {
@@ -66,6 +67,7 @@ export const App: React.FC<Partial<AppProps>> = (props) => {
       viewMode={props.viewMode ?? defaultViewMode}
       year={props.year ?? null}
       generatedAt={props.generatedAt}
+      overrideTitle={props.overrideTitle}
     />
   )
 }
@@ -79,6 +81,7 @@ const MikuPage: React.FunctionComponent<AppProps> = ({
   configuration,
   isLoading,
   generatedAt,
+  overrideTitle,
 }) => {
   const title = `Snow Miku ${year ?? ''}`
   return (
@@ -103,7 +106,7 @@ const MikuPage: React.FunctionComponent<AppProps> = ({
       <section className='section'>
         <div className='container'>
           <h2 className='title'>
-            {viewMode === 'Popular' ? 'Most Popular Entries' : 'Latest Entries'}
+            {overrideTitle ?? (viewMode === 'Popular' ? 'Most Popular Entries' : 'Latest Entries')}
           </h2>
           <div>
             <Paginator
@@ -167,7 +170,7 @@ const Result: React.FunctionComponent<ResultProps> = ({ result, depth }) => {
   return result ? (
     <div className='tile is-parent' key={result.link}>
       <div className='tile is-child card' key={result.link}>
-        <a href={result.link} target='blank'>
+        <a href={result.link} target={result.link.startsWith('http') ? '_blank' : ''} rel="noreferrer">
           <div className='card-image'>
             <figure className='image is-16by9'>
               <img
@@ -193,7 +196,10 @@ const Result: React.FunctionComponent<ResultProps> = ({ result, depth }) => {
               <div className='media-content'>
                 <p className='title is-5'>{result.name}</p>
                 <p className='subtitle is-5 mb-1'>{result.author}</p>
-                <p className='subtitle is-7'> {result.postTime} views {result.views.toLocaleString()}</p>
+                <p className='subtitle is-7'>
+                  {' '}
+                  {result.postTime} views {result.views.toLocaleString()}
+                </p>
               </div>
             </div>
           </div>
