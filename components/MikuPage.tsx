@@ -58,9 +58,11 @@ export const getStaticPropsBase: GetStaticProps<AppProps, YearQuery> = async (qu
     generatedAt: new Date().toISOString(),
   }
 
+  const revalidate = year === configuration.latestYear ? 5 * 60 : 60 * 60
+
   return {
     props,
-    revalidate: 5 * 60,
+    revalidate,
   }
 }
 
