@@ -61,7 +61,6 @@ export const getCached = async <T>(key: string, allowStale = false): Promise<cac
 
 export const storeCache = async (key: string, data: unknown, lifetimeMillis: number) => {
   const Expires = new Date(new Date().getTime() + lifetimeMillis)
-  console.log(Expires)
 
   await client.send(
     new PutObjectCommand({

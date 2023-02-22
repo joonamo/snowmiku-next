@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
-import ClassNames from "classnames"
-import Link from "next/link"
-import * as React from "react"
+import ClassNames from 'classnames'
+import Link from 'next/link'
+import * as React from 'react'
 
-import { ViewMode } from "./App"
+import { ViewMode } from './App'
 
 interface PaginatorProps {
   currentPage: number
@@ -18,50 +18,27 @@ export const Paginator: React.FunctionComponent<PaginatorProps> = ({
   year,
   viewMode,
 }) => {
-  const pagePrefix = React.useMemo(
-    () => `/${year}/${viewMode}`,
-    [year, viewMode]
-  )
+  const pagePrefix = React.useMemo(() => `/${year}/${viewMode}`, [year, viewMode])
   return (
-    <nav className="pagination" role="navigation" aria-label="pagination">
+    <nav className='pagination' role='navigation' aria-label='pagination'>
       <Link
-        className="pagination-previous has-background-white"
+        className='pagination-previous has-background-white'
         href={`${pagePrefix}/${Math.max(1, currentPage - 1)}`}
       >
         Previous
       </Link>
       <Link
-        className="pagination-next has-background-white"
+        className='pagination-next has-background-white'
         href={`${pagePrefix}/${Math.min(pageCount, currentPage + 1)}`}
       >
         Next
       </Link>
-      <ul className="pagination-list">
-        <FirstPage
-          pagePrefix={pagePrefix}
-          currentPage={currentPage}
-          pageCount={pageCount}
-        />
-        <PrevPage
-          pagePrefix={pagePrefix}
-          currentPage={currentPage}
-          pageCount={pageCount}
-        />
-        <ThisPage
-          pagePrefix={pagePrefix}
-          currentPage={currentPage}
-          pageCount={pageCount}
-        />
-        <NextPage
-          pagePrefix={pagePrefix}
-          currentPage={currentPage}
-          pageCount={pageCount}
-        />
-        <LastPage
-          pagePrefix={pagePrefix}
-          currentPage={currentPage}
-          pageCount={pageCount}
-        />
+      <ul className='pagination-list'>
+        <FirstPage pagePrefix={pagePrefix} currentPage={currentPage} pageCount={pageCount} />
+        <PrevPage pagePrefix={pagePrefix} currentPage={currentPage} pageCount={pageCount} />
+        <ThisPage pagePrefix={pagePrefix} currentPage={currentPage} pageCount={pageCount} />
+        <NextPage pagePrefix={pagePrefix} currentPage={currentPage} pageCount={pageCount} />
+        <LastPage pagePrefix={pagePrefix} currentPage={currentPage} pageCount={pageCount} />
       </ul>
     </nav>
   )
@@ -73,31 +50,20 @@ interface PageLinkProps {
   pagePrefix: string
 }
 
-const FirstPage: React.FunctionComponent<PageLinkProps> = ({
-  currentPage,
-  pagePrefix,
-}) => {
+const FirstPage: React.FunctionComponent<PageLinkProps> = ({ currentPage, pagePrefix }) => {
   return currentPage < 3 ? <></> : <PageLink page={1} pagePrefix={pagePrefix} />
 }
 
-const PrevPage: React.FunctionComponent<PageLinkProps> = ({
-  currentPage,
-  pagePrefix,
-}) => {
+const PrevPage: React.FunctionComponent<PageLinkProps> = ({ currentPage, pagePrefix }) => {
   return (
     <>
       {currentPage > 3 ? <Ellipsis /> : null}
-      {currentPage > 1 ? (
-        <PageLink page={currentPage - 1} pagePrefix={pagePrefix} />
-      ) : null}
+      {currentPage > 1 ? <PageLink page={currentPage - 1} pagePrefix={pagePrefix} /> : null}
     </>
   )
 }
 
-const ThisPage: React.FunctionComponent<PageLinkProps> = ({
-  currentPage,
-  pagePrefix,
-}) => (
+const ThisPage: React.FunctionComponent<PageLinkProps> = ({ currentPage, pagePrefix }) => (
   <PageLink page={currentPage} pagePrefix={pagePrefix} isActivePage={true} />
 )
 
@@ -124,12 +90,13 @@ const LastPage: React.FunctionComponent<PageLinkProps> = ({
   return currentPage > pageCount - 2 ? (
     <></>
   ) : (
-    <PageLink page={pageCount} pagePrefix={pagePrefix} />
+    <PageLink page={pageCount} pagePrefix={pagePrefix} isLastPage />
   )
 }
 
 interface ActualPageLinkProps {
   isActivePage?: boolean
+  isLastPage?: boolean
   page: number
   pagePrefix: string
 }
@@ -137,15 +104,17 @@ const PageLink: React.FunctionComponent<ActualPageLinkProps> = ({
   isActivePage,
   pagePrefix,
   page,
+  isLastPage,
 }) => (
   <li>
     <Link
-      className={ClassNames("pagination-link", {
-        "is-current": isActivePage,
-        "has-background-white": !isActivePage,
+      className={ClassNames('pagination-link', {
+        'is-current': isActivePage,
+        'has-background-white': !isActivePage,
       })}
       key={`paginator_${page}`}
       href={`${pagePrefix}/${page}`}
+      prefetch={!isLastPage}
     >
       {page}
     </Link>
@@ -154,7 +123,7 @@ const PageLink: React.FunctionComponent<ActualPageLinkProps> = ({
 
 const Ellipsis: React.FunctionComponent = () => (
   <li>
-    {" "}
-    <span>&hellip;</span>{" "}
+    {' '}
+    <span>&hellip;</span>{' '}
   </li>
 )

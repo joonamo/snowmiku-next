@@ -8,11 +8,11 @@ export interface MikuResult {
   link: string
   image: string
   authorIcon?: string
-  piaproUrl?: string
 }
 
 export interface ResultsPage {
   results: MikuResult[]
+  piaproUrl: string
   pageCount: number
 }
 
@@ -39,7 +39,7 @@ export const processPage = async (
   orderTag: string,
   page = 1,
 ): Promise<ResultsPage> => {
-  const cacheKey = `page-result/${year}/${orderTag}/${page}`
+  const cacheKey = `page-result-v2/${year}/${orderTag}/${page}`
   const cached = await getCached<ResultsPage>(cacheKey)
   if (cached.data) {
     return cached.data
@@ -63,13 +63,13 @@ export const processPage = async (
       authorIcon: item.find(undefined, 'i_icon')?.find('img').attrs['src'] ?? null,
       image: imageLink(linkElem.attrs['style']),
       link: `https://piapro.jp${linkElem.attrs['href']}`,
-      piaproUrl,
     }
   })
 
   const result = {
     pageCount: pageCount(mikuHtml),
     results,
+    piaproUrl,
   }
 
   await storeCache(cacheKey, result, 5 * 60 * 1000)
