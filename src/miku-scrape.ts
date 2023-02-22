@@ -1,5 +1,6 @@
 import JSSoup, { SoupTag } from 'jssoup'
 import { getCached, storeCache } from './cache'
+import { logInfo } from './logger'
 
 export interface MikuResult {
   name: string
@@ -15,8 +16,8 @@ export interface ResultsPage {
   pageCount: number
 }
 
-export const latestTag = "sd"
-export const popularTag = "cv"
+export const latestTag = 'sd'
+export const popularTag = 'cv'
 
 export const getYearTag = (year: string) => {
   const tens = year[year.length - 2]
@@ -33,19 +34,23 @@ const imageLink = (styleAttr: string) => {
 export const paginatorRegex = /new Paginator\('_paginator', ([0-9]*)/
 const pageCount = (page?: string) => Number((page && paginatorRegex.exec(page)?.[1]) ?? 1)
 
-export const processPage = async (year: string, orderTag: string, page = 1): Promise<ResultsPage> => {    
+export const processPage = async (
+  year: string,
+  orderTag: string,
+  page = 1,
+): Promise<ResultsPage> => {
   const cacheKey = `page-result/${year}/${orderTag}/${page}`
   const cached = await getCached<ResultsPage>(cacheKey)
-  if (cached) {
-    return cached
+  if (cached.data) {
+    return cached.data
   }
-  
+
   const yearTag = getYearTag(year)
   const piaproUrl = `https://piapro.jp/content_list/?view=image&tag=${yearTag}%E5%B9%B4%E9%9B%AA%E3%83%9F%E3%82%AF%E8%A1%A3%E8%A3%85&order=${orderTag}&page=${page}`
-  
-  console.log(piaproUrl)
+
+  logInfo(`Calling Piapro`, { piaproUrl })
   const mikuReq = await fetch(piaproUrl)
-  console.log(`got response, status ${mikuReq.status} ${mikuReq.ok}`)
+  console.log(`got response`, { status: mikuReq.status, ok: mikuReq.ok })
   const mikuHtml = await mikuReq.text()
   const soup = new JSSoup(mikuHtml)
   const images = soup.findAll('div', 'i_main')
@@ -58,13 +63,13 @@ export const processPage = async (year: string, orderTag: string, page = 1): Pro
       authorIcon: item.find(undefined, 'i_icon')?.find('img').attrs['src'] ?? null,
       image: imageLink(linkElem.attrs['style']),
       link: `https://piapro.jp${linkElem.attrs['href']}`,
-      piaproUrl
+      piaproUrl,
     }
   })
-  
+
   const result = {
     pageCount: pageCount(mikuHtml),
-    results
+    results,
   }
 
   await storeCache(cacheKey, result, 5 * 60 * 1000)
@@ -73,21 +78,27 @@ export const processPage = async (year: string, orderTag: string, page = 1): Pro
 }
 
 export const getLatestYear = async (): Promise<number> => {
-  const cacheKey = "latestYear"
-  const cached = await getCached<{latestYear: number}>(cacheKey)
-  if (cached) {
-    return cached.latestYear
+  const cacheKey = 'latestYear'
+  const cached = await getCached<{ latestYear: number }>(cacheKey, true)
+  if (cached.data?.latestYear && !cached.stale) {
+    return cached.data.latestYear
   }
 
   const maxYear = new Date().getFullYear() + 1
-  const promises = []
-  for (let year = maxYear; year >= 2023; year--) {
-    promises.push(processPage(year.toString(), latestTag))
-  }
+  let latestYear = cached.data?.latestYear
+  if (maxYear === latestYear) {
+    console.log('Stale cache, but valid year, accepting for 24h')
+    await storeCache(cacheKey, { latestYear }, 24 * 60 * 60 * 1000)
+  } else {
+    const promises = []
+    for (let year = maxYear; year >= 2024; year--) {
+      promises.push(processPage(year.toString(), latestTag))
+    }
 
-  const results = await Promise.all(promises)
-  const latestYear = maxYear - results.findIndex(result => result.results.length != 0)
-  await storeCache(cacheKey, { latestYear }, 60 * 60 * 1000)
+    const results = await Promise.all(promises)
+    latestYear = maxYear - results.findIndex((result) => result.results.length != 0)
+    await storeCache(cacheKey, { latestYear }, 60 * 60 * 1000)
+  }
 
   return latestYear
 }
