@@ -13,31 +13,40 @@ interface YearQuery extends ParsedUrlQuery {
 const yearRe = /^20\d\d$/
 
 export const getStaticPropsBase: GetStaticProps<AppProps, YearQuery> = async (query) => {
-  if (!yearRe.test(query.params?.year ?? "")) {
-    return { notFound: true } 
+  if (!yearRe.test(query.params?.year ?? '')) {
+    return { notFound: true }
   }
-  
+
   const configuration = {
     firstYear: 2012,
-    latestYear: await getLatestYear()
+    latestYear: await getLatestYear(),
   }
 
   const yearParsed = query.params?.year && Number.parseInt(query.params?.year, 10)
-  const year = 
-    yearParsed && 
-    Number.isFinite(yearParsed) && 
+  const year =
+    yearParsed &&
+    Number.isFinite(yearParsed) &&
     yearParsed <= configuration.latestYear + 1 &&
     yearParsed >= configuration.firstYear
-      ? yearParsed 
+      ? yearParsed
       : configuration.latestYear
   const currentPageParsed = query.params?.page && Number.parseInt(query.params?.page, 10)
-  const currentPage = currentPageParsed && Number.isFinite(currentPageParsed) ? currentPageParsed : 1
-  const viewMode = 
-    query.params?.viewMode === 'Latest' ? 'Latest' :
-    query.params?.viewMode === 'Popular' ? 'Popular' :
-    year === configuration.latestYear ? defaultViewMode : 'Popular'
+  const currentPage =
+    currentPageParsed && Number.isFinite(currentPageParsed) ? currentPageParsed : 1
+  const viewMode =
+    query.params?.viewMode === 'Latest'
+      ? 'Latest'
+      : query.params?.viewMode === 'Popular'
+      ? 'Popular'
+      : year === configuration.latestYear
+      ? defaultViewMode
+      : 'Popular'
 
-  const { pageCount, results } = await processPage(String(year), viewMode === 'Latest' ? latestTag : popularTag, currentPage)
+  const { pageCount, results } = await processPage(
+    String(year),
+    viewMode === 'Latest' ? latestTag : popularTag,
+    currentPage,
+  )
 
   const props: AppProps = {
     configuration,
@@ -46,7 +55,7 @@ export const getStaticPropsBase: GetStaticProps<AppProps, YearQuery> = async (qu
     pageCount,
     viewMode,
     year: String(year),
-    generatedAt: new Date().toISOString()
+    generatedAt: new Date().toISOString(),
   }
 
   return {
@@ -56,5 +65,6 @@ export const getStaticPropsBase: GetStaticProps<AppProps, YearQuery> = async (qu
 }
 
 export const getStaticPathsBase: GetStaticPaths = () => ({
-  paths: [], fallback: true
+  paths: [],
+  fallback: true,
 })

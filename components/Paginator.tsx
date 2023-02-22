@@ -87,11 +87,7 @@ const LastPage: React.FunctionComponent<PageLinkProps> = ({
   pagePrefix,
   pageCount,
 }) => {
-  return currentPage > pageCount - 2 ? (
-    <></>
-  ) : (
-    <PageLink page={pageCount} pagePrefix={pagePrefix} />
-  )
+  return currentPage > pageCount - 2 ? <></> : <PageLink page={pageCount} pagePrefix={pagePrefix} />
 }
 
 interface ActualPageLinkProps {

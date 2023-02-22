@@ -1,7 +1,7 @@
-const baseurl = 
+const baseurl =
   process.env.NODE_ENV === 'development'
-  ? 'http://localhost:3000'
-  : process.env.VERCEL_URL && `https://${process.env.VERCEL_URL}`
+    ? 'http://localhost:3000'
+    : process.env.VERCEL_URL && `https://${process.env.VERCEL_URL}`
 
 export const prefetchPage = (year: string, orderTag: string, page: number) => {
   if (baseurl) {

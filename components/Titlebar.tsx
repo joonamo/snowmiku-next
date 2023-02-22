@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
-import ClassNames from "classnames"
-import Link from "next/link"
-import * as React from "react"
-import { Configuration, ViewMode } from "./App"
-import { ExternalLink } from "./ExternalLink"
-import { Logo } from "./logo"
+import ClassNames from 'classnames'
+import Link from 'next/link'
+import * as React from 'react'
+import { Configuration, ViewMode } from './App'
+import { ExternalLink } from './ExternalLink'
+import { Logo } from './logo'
 
 interface TitlebarProps {
   viewMode: ViewMode
@@ -59,19 +59,19 @@ export const Titlebar: React.FunctionComponent<TitlebarProps> = ({
 
   return (
     <nav
-      className="navbar is-info is-fixed-top add-shadow"
-      role="navigation"
-      aria-label="main navigation"
+      className='navbar is-info is-fixed-top add-shadow'
+      role='navigation'
+      aria-label='main navigation'
     >
-      <div className="logo-container">
+      <div className='logo-container'>
         <Logo />
       </div>
-      <div className="navbar-brand">
-        <div className="navbar-item is-paddingless is-hidden-touch">
-          <p className="title has-text-white">Snow Miku</p>
+      <div className='navbar-brand'>
+        <div className='navbar-item is-paddingless is-hidden-touch'>
+          <p className='title has-text-white'>Snow Miku</p>
         </div>
-        <div className="is-paddingless navbar-item is-hidden-desktop flex-1">
-          <p className="title main-title flex-1 has-text-white has-text-right-mobile">
+        <div className='is-paddingless navbar-item is-hidden-desktop flex-1'>
+          <p className='title main-title flex-1 has-text-white has-text-right-mobile'>
             Snow Miku {year}
           </p>
         </div>
@@ -86,26 +86,26 @@ export const Titlebar: React.FunctionComponent<TitlebarProps> = ({
         />
 
         <a
-          role="button"
-          className={ClassNames("navbar-burger", {
-            "is-active": burgerOpen,
+          role='button'
+          className={ClassNames('navbar-burger', {
+            'is-active': burgerOpen,
           })}
-          aria-label="menu"
-          aria-expanded="false"
+          aria-label='menu'
+          aria-expanded='false'
           onClick={toggleBurger}
         >
-          <span aria-hidden="true" />
-          <span aria-hidden="true" />
-          <span aria-hidden="true" />
+          <span aria-hidden='true' />
+          <span aria-hidden='true' />
+          <span aria-hidden='true' />
         </a>
       </div>
 
       <div
-        className={ClassNames("navbar-menu", {
-          "is-active": burgerOpen,
+        className={ClassNames('navbar-menu', {
+          'is-active': burgerOpen,
         })}
       >
-        <div className="navbar-start">
+        <div className='navbar-start'>
           <YearSelector
             configuration={configuration}
             isTitle={false}
@@ -116,54 +116,42 @@ export const Titlebar: React.FunctionComponent<TitlebarProps> = ({
           />
 
           <div
-            className={ClassNames("navbar-item", "has-dropdown", {
-              "is-active": sortDropdownOpen,
+            className={ClassNames('navbar-item', 'has-dropdown', {
+              'is-active': sortDropdownOpen,
             })}
           >
-            <a className="navbar-link" onClick={toggleSortDropdown}>
+            <a className='navbar-link' onClick={toggleSortDropdown}>
               {`Sort: ${viewMode}`}
             </a>
 
             <div
-              className={ClassNames("navbar-dropdown", {
-                "is-hidden-touch": !sortDropdownOpen,
+              className={ClassNames('navbar-dropdown', {
+                'is-hidden-touch': !sortDropdownOpen,
               })}
             >
-              <Link
-                href={`/${year}/Latest`}
-                className="navbar-item"
-                onClick={closeAll}
-              >
+              <Link href={`/${year}/Latest`} className='navbar-item' onClick={closeAll}>
                 Latest
               </Link>
-              <Link
-                href={`/${year}/Popular`}
-                className="navbar-item"
-                onClick={closeAll}
-              >
+              <Link href={`/${year}/Popular`} className='navbar-item' onClick={closeAll}>
                 Popular
               </Link>
             </div>
           </div>
 
           <a
-            href="https://piapro.jp/pages/official_collabo/2023snowmiku_s5gnpkaj/index"
-            target="blank"
-            className="navbar-item"
+            href='https://piapro.jp/pages/official_collabo/2023snowmiku_s5gnpkaj/index'
+            target='blank'
+            className='navbar-item'
           >
             <span>Official Design Contest page</span>
-            <span className="icon">
+            <span className='icon'>
               <ExternalLink />
             </span>
           </a>
 
-          <a
-            href="https://snowmiku.com/"
-            target="blank"
-            className="navbar-item"
-          >
+          <a href='https://snowmiku.com/' target='blank' className='navbar-item'>
             <span>SnowMiku.com</span>
-            <span className="icon">
+            <span className='icon'>
               <ExternalLink />
             </span>
           </a>
@@ -191,21 +179,21 @@ const YearSelector: React.FunctionComponent<YearSelectorProps> = ({
 }) => (
   <div
     className={ClassNames(
-      "navbar-item",
-      "has-dropdown",
-      { "is-active": yearDropdownOpen },
-      isTitle ? "is-hidden-touch" : "is-hidden-desktop"
+      'navbar-item',
+      'has-dropdown',
+      { 'is-active': yearDropdownOpen },
+      isTitle ? 'is-hidden-touch' : 'is-hidden-desktop',
     )}
   >
-    <a className="navbar-link navbar-item" onClick={toggleYearDropdown}>
-      <p className={isTitle ? "title has-text-white" : ""}>
-        {!isTitle ? "Year:" : ""} {year}
+    <a className='navbar-link navbar-item' onClick={toggleYearDropdown}>
+      <p className={isTitle ? 'title has-text-white' : ''}>
+        {!isTitle ? 'Year:' : ''} {year}
       </p>
     </a>
 
     <div
-      className={ClassNames("navbar-dropdown", {
-        "is-hidden-touch": !yearDropdownOpen,
+      className={ClassNames('navbar-dropdown', {
+        'is-hidden-touch': !yearDropdownOpen,
       })}
     >
       <YearSelectors configuration={configuration} closeMenu={closeMenu} />
@@ -223,20 +211,16 @@ const YearSelectors: React.FunctionComponent<YearSelectorsProps> = ({
 }) => {
   if (configuration) {
     const selectors = []
-    for (
-      let year = configuration.latestYear;
-      year >= configuration.firstYear;
-      year--
-    ) {
+    for (let year = configuration.latestYear; year >= configuration.firstYear; year--) {
       selectors.push(
         <Link
-          className="navbar-item"
+          className='navbar-item'
           onClick={closeMenu}
           href={`/${year}`}
           key={`year-selector-${year}`}
         >
           {year}
-        </Link>
+        </Link>,
       )
     }
     return <>{selectors}</>
