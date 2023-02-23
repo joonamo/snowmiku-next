@@ -120,7 +120,7 @@ export const Titlebar: React.FunctionComponent<TitlebarProps> = ({
               'is-active': sortDropdownOpen,
             })}
           >
-            <a className='navbar-link' onClick={toggleSortDropdown}>
+            <a className='navbar-link' onClick={toggleSortDropdown} role='button'>
               {`Sort: ${viewMode}`}
             </a>
 
@@ -139,7 +139,7 @@ export const Titlebar: React.FunctionComponent<TitlebarProps> = ({
           </div>
 
           <a
-            href='https://piapro.jp/pages/official_collabo/2024snowmiku_p7hemqu6/'
+            href='https://piapro.jp/pages/official_collabo/2023snowmiku_s5gnpkaj/index'
             target='blank'
             className='navbar-item'
           >
@@ -185,7 +185,7 @@ const YearSelector: React.FunctionComponent<YearSelectorProps> = ({
       isTitle ? 'is-hidden-touch' : 'is-hidden-desktop',
     )}
   >
-    <a className='navbar-link navbar-item' onClick={toggleYearDropdown}>
+    <a className='navbar-link navbar-item' onClick={toggleYearDropdown} role='button'>
       <p className={isTitle ? 'title has-text-white' : ''}>
         {!isTitle ? 'Year:' : ''} {year}
       </p>
