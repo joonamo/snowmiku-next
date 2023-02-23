@@ -184,6 +184,8 @@ const Result: React.FunctionComponent<ResultProps> = ({ result, depth }) => {
                     src={result.authorIcon}
                     loading='lazy'
                     alt={`Avatar of ${result.author}`}
+                    width="48px"
+                    height="48px"
                   />
                 </figure>
               </div>

@@ -36,13 +36,13 @@ const imageLink = (styleAttr: string) => {
 const viewsRegex = /閲覧数:([\d,]+)/
 const getViews = (html: string) => {
   const re = viewsRegex.exec(html)
-  return (re && parseInt( re[1].replace(',', ''), 10)) ?? 0
+  return (re && parseInt(re[1].replace(',', ''), 10)) ?? 0
 }
 
 const postTimeRegex = /(\d\d\d\d\/\d\d\/\d\d \d\d:\d\d)/ // Beautiful
 const getPostTime = (html: string) => {
   const re = postTimeRegex.exec(html)
-  return re?.[1] ?? ""
+  return re?.[1] ?? ''
 }
 
 export const paginatorRegex = /new Paginator\('_paginator', ([0-9]*)/
@@ -53,7 +53,7 @@ export const processPage = async (
   orderTag: string,
   page = 1,
 ): Promise<ResultsPage> => {
-  const cacheKey = `page-result-v3/${year}/${orderTag}/${page}`
+  const cacheKey = `page-result-v4/${year}/${orderTag}/${page}`
   const cached = await getCached<ResultsPage>(cacheKey)
   if (cached.data) {
     return cached.data
@@ -75,7 +75,9 @@ export const processPage = async (
     return {
       name: item.find(undefined, 'thumb_over').text,
       author: item.find(undefined, 'i_title').text,
-      authorIcon: item.find(undefined, 'i_icon')?.find('img').attrs['src'] ?? null,
+      authorIcon:
+        item.find(undefined, 'i_icon')?.find('img').attrs['src'].replace('_0048.', '_0150.') ??
+        null,
       image: imageLink(linkElem.attrs['style']),
       views: getViews(asString),
       postTime: getPostTime(asString),
