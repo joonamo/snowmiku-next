@@ -45,13 +45,17 @@
   border-radius: 10px;
 }
 
+.skeleton-reverse {
+  animation: loading 1s infinite alternate-reverse;
+}
+
 @keyframes loading {
   from {
-    background-color: hsl(200, 100%, 97%);;
+    background-color: hsl(210, 60%, 95%);
   }
 
   to {
-    background-color: hsl(204, 38%, 95%);
+    background-color: hsl(210, 60%, 98%);
   }
 }
 
