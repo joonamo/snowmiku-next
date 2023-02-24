@@ -10,9 +10,6 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.272.0",
-    "@fortawesome/fontawesome-svg-core": "^6.3.0",
-    "@fortawesome/free-solid-svg-icons": "^6.3.0",
-    "@fortawesome/react-fontawesome": "^0.2.0",
     "@next/font": "13.1.6",
     "@types/node": "18.14.0",
     "@types/react": "18.0.28",
@@ -43,5 +40,9 @@
     "prettier": "^2.8.4",
     "sass": "^1.58.3"
   },
-  "browserslist": [">0.3%", "not dead", "not op_mini all"]
+  "browserslist": [
+    ">0.3%",
+    "not dead",
+    "not op_mini all"
+  ]
 }
