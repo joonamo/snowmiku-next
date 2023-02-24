@@ -1,11 +1,11 @@
+'use client'
+
 import Head from 'next/head'
-import { useRouter } from 'next/router'
 import * as React from 'react'
 
 import { Disclaimer } from './Disclaimer'
 import { Paginator } from './Paginator'
 import { ResultsSkeleton } from './SkeletonResults'
-import { defaultViewMode } from './staticConfig'
 import { Titlebar } from './Titlebar'
 
 export type ViewMode = 'Latest' | 'Popular'
@@ -37,42 +37,7 @@ export interface AppProps {
   overrideTitle?: string
 }
 
-export const App: React.FC<Partial<AppProps>> = (props) => {
-  const router = useRouter()
-
-  const [loading, setLoading] = React.useState(false)
-
-  React.useEffect(() => {
-    const handleStart = () => setLoading(true)
-    const handleComplete = () => setLoading(false)
-
-    router.events.on('routeChangeStart', handleStart)
-    router.events.on('routeChangeComplete', handleComplete)
-    router.events.on('routeChangeError', handleComplete)
-
-    return () => {
-      router.events.off('routeChangeStart', handleStart)
-      router.events.off('routeChangeComplete', handleComplete)
-      router.events.off('routeChangeError', handleComplete)
-    }
-  })
-
-  return (
-    <MikuPage
-      configuration={props.configuration ?? null}
-      currentPage={props.currentPage ?? 1}
-      imagesInfos={props.imagesInfos ?? []}
-      isLoading={router.isFallback || loading}
-      pageCount={props.pageCount ?? 1}
-      viewMode={props.viewMode ?? defaultViewMode}
-      year={props.year ?? null}
-      generatedAt={props.generatedAt}
-      overrideTitle={props.overrideTitle}
-    />
-  )
-}
-
-const MikuPage: React.FunctionComponent<AppProps> = ({
+export const MikuPage: React.FunctionComponent<AppProps> = ({
   imagesInfos,
   viewMode,
   year,

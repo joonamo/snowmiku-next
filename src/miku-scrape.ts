@@ -63,7 +63,7 @@ export const processPage = async (
   const piaproUrl = `https://piapro.jp/content_list/?view=image&tag=${yearTag}%E5%B9%B4%E9%9B%AA%E3%83%9F%E3%82%AF%E8%A1%A3%E8%A3%85&order=${orderTag}&page=${page}`
 
   logInfo(`Calling Piapro`, { piaproUrl })
-  const mikuReq = await fetch(piaproUrl)
+  const mikuReq = await fetch(piaproUrl, {next: {revalidate: 5 * 60}})
   console.log(`got response`, { status: mikuReq.status, ok: mikuReq.ok })
   const mikuHtml = await mikuReq.text()
   const soup = new JSSoup(mikuHtml)
