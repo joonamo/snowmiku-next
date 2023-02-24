@@ -27,6 +27,7 @@
   },
   "packageManager": "yarn@3.4.1",
   "devDependencies": {
+    "@aws-sdk/signature-v4-crt": "^3.272.0",
     "@types/cors": "^2.8.13",
     "@typescript-eslint/eslint-plugin": "latest",
     "@typescript-eslint/parser": "latest",
