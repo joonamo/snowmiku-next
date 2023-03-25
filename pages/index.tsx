@@ -1,4 +1,4 @@
-import { getLatestYear, latestTag, processPage } from '@/src/miku-scrape'
+import { getLatestYear, processPage } from '@/src/miku-scrape'
 import { GetStaticProps } from 'next'
 import { App, AppProps } from '@/components/App'
 import { defaultViewMode } from '@/components/staticConfig'
@@ -14,7 +14,7 @@ export const getStaticProps: GetStaticProps<AppProps> = async () => {
   const year = configuration.latestYear
   const page = 1
 
-  const {pageCount, results} = await processPage(String(year), latestTag, page)
+  const {pageCount, results} = await processPage(String(year), defaultViewMode, page)
   
   const props: AppProps = {
     configuration,
