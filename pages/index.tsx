@@ -1,4 +1,4 @@
-import { getLatestYear, processPage } from '@/src/miku-scrape'
+import { getLatestYear, processPage, popularTag, processPage } from '@/src/miku-scrape'
 import { GetStaticProps } from 'next'
 import { App, AppProps } from '@/components/App'
 import { defaultViewMode } from '@/components/staticConfig'
@@ -14,8 +14,7 @@ export const getStaticProps: GetStaticProps<AppProps> = async () => {
   const year = configuration.latestYear
   const page = 1
 
-  // quick hack to fix popular main page
-  const {pageCount, results} = await processPage(String(year), 'cv', page)
+  const {pageCount, results} = await processPage(String(year), defaultViewMode === 'Latest' ? latestTag : popularTag, page)
   
   const props: AppProps = {
     configuration,
