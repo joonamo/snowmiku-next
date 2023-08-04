@@ -14,7 +14,8 @@ export const getStaticProps: GetStaticProps<AppProps> = async () => {
   const year = configuration.latestYear
   const page = 1
 
-  const {pageCount, results} = await processPage(String(year), defaultViewMode, page)
+  // quick hack to fix popular main page
+  const {pageCount, results} = await processPage(String(year), 'cv', page)
   
   const props: AppProps = {
     configuration,
