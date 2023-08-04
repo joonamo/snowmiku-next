@@ -7,7 +7,6 @@ import { Paginator } from './Paginator'
 import { ResultsSkeleton } from './SkeletonResults'
 import { defaultViewMode } from './staticConfig'
 import { Titlebar } from './Titlebar'
-import { VotingInfo } from './VotingInfo'
 
 export type ViewMode = 'Latest' | 'Popular'
 
@@ -105,7 +104,7 @@ const MikuPage: React.FunctionComponent<AppProps> = ({
       </Head>
       <Titlebar viewMode={viewMode} year={year} configuration={configuration} />
       <section className='section'>
-        <VotingInfo />
+        
         <div className='container'>
           <h2 className='title'>
             {overrideTitle ?? (viewMode === 'Popular' ? 'Most Popular Entries' : 'Latest Entries')}
