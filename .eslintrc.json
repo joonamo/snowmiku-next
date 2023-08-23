@@ -20,8 +20,6 @@
     },
     "plugins": [
         "react",
-        "@typescript-eslint",
-        "react-hooks",
         "@typescript-eslint"
     ],
     "rules": {
