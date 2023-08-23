@@ -11,8 +11,8 @@ export interface MikuResult {
   views: number
   postTime: string
   authorIcon?: string
-  isFinalist: boolean
-  isWinner: boolean
+  isFinalist?: boolean
+  isWinner?: boolean
 }
 
 export interface ResultsPage {
