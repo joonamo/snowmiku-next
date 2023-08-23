@@ -23,6 +23,8 @@ export const getStaticProps: GetStaticProps<AppProps> = async () => {
         link: '/',
         postTime: '',
         views: 404,
+        isFinalist: false,
+        isWinner: false
       },
     ],
     pageCount: 1,
