@@ -10,12 +10,14 @@ interface TitlebarProps {
   viewMode: ViewMode
   year: string | null
   configuration: Configuration | null
+  officialPage?: string
 }
 
 export const Titlebar: React.FunctionComponent<TitlebarProps> = ({
   viewMode,
   year,
   configuration,
+  officialPage,
 }) => {
   const [burgerOpen, setBurgerOpen] = React.useState<boolean>(false)
   const [sortDropdownOpen, setSortDropdownOpen] = React.useState<boolean>(false)
@@ -138,16 +140,14 @@ export const Titlebar: React.FunctionComponent<TitlebarProps> = ({
             </div>
           </div>
 
-          <a
-            href='https://piapro.jp/pages/official_collabo/2024snowmiku_p7hemqu6'
-            target='blank'
-            className='navbar-item'
-          >
-            <span>Official Design Contest page</span>
-            <span className='icon'>
-              <ExternalLink />
-            </span>
-          </a>
+          {officialPage && (
+            <a href={officialPage} target='_blank' className='navbar-item'>
+              <span>Official Design Contest page</span>
+              <span className='icon'>
+                <ExternalLink />
+              </span>
+            </a>
+          )}
 
           <a href='https://snowmiku.com/' target='blank' className='navbar-item'>
             <span>SnowMiku.com</span>

@@ -3,6 +3,7 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 import { AppProps, ViewMode } from '@/components/App'
 import { ParsedUrlQuery } from 'querystring'
 import { defaultViewMode } from './staticConfig'
+import { metadatabase } from '@/src/metadatabase'
 
 interface YearQuery extends ParsedUrlQuery {
   year?: string
@@ -48,6 +49,8 @@ export const getStaticPropsBase: GetStaticProps<AppProps, YearQuery> = async (qu
     currentPage,
   )
 
+  const officialPage = metadatabase[year]?.officialPage
+
   const props: AppProps = {
     configuration,
     currentPage,
@@ -56,6 +59,7 @@ export const getStaticPropsBase: GetStaticProps<AppProps, YearQuery> = async (qu
     viewMode,
     year: String(year),
     generatedAt: new Date().toISOString(),
+    officialPage
   }
 
   const revalidate = year === configuration.latestYear ? 5 * 60 : 60 * 60

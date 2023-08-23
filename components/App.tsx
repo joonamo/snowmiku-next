@@ -28,6 +28,7 @@ export interface AppProps {
   isLoading?: boolean
   generatedAt?: string
   overrideTitle?: string
+  officialPage?: string
 }
 
 export const App: React.FC<Partial<AppProps>> = (props) => {
@@ -61,6 +62,7 @@ export const App: React.FC<Partial<AppProps>> = (props) => {
       year={props.year ?? null}
       generatedAt={props.generatedAt}
       overrideTitle={props.overrideTitle}
+      officialPage={props.officialPage}
     />
   )
 }
@@ -75,6 +77,7 @@ const MikuPage: React.FunctionComponent<AppProps> = ({
   isLoading,
   generatedAt,
   overrideTitle,
+  officialPage
 }) => {
   const title = `Snow Miku ${year ?? ''}`
   return (
@@ -95,7 +98,12 @@ const MikuPage: React.FunctionComponent<AppProps> = ({
         <meta property='og:url' content='https://snowmiku.net' />
         <meta property='og:image' content='logo.png' />
       </Head>
-      <Titlebar viewMode={viewMode} year={year} configuration={configuration} />
+      <Titlebar
+        viewMode={viewMode}
+        year={year}
+        configuration={configuration}
+        officialPage={officialPage}
+      />
       <section className='section'>
         <div className='container'>
           <h2 className='title'>
