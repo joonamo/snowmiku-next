@@ -2,6 +2,7 @@ import { getLatestYear, processPage, popularTag, latestTag } from '@/src/miku-sc
 import { GetStaticProps } from 'next'
 import { App, AppProps } from '@/components/App'
 import { defaultViewMode } from '@/components/staticConfig'
+import { metadatabase } from '@/src/metadatabase'
 
 export default App
 
@@ -15,6 +16,8 @@ export const getStaticProps: GetStaticProps<AppProps> = async () => {
   const page = 1
 
   const {pageCount, results} = await processPage(String(year), defaultViewMode === 'Latest' ? latestTag : popularTag, page)
+  const officialPage = metadatabase[String(year)]?.officialPage
+
   
   const props: AppProps = {
     configuration,
@@ -23,7 +26,8 @@ export const getStaticProps: GetStaticProps<AppProps> = async () => {
     pageCount,
     viewMode: defaultViewMode,
     year: String(year),
-    generatedAt: new Date().toISOString()
+    generatedAt: new Date().toISOString(),
+    officialPage,
   }
 
   return {

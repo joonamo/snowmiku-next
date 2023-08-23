@@ -49,7 +49,7 @@ export const getStaticPropsBase: GetStaticProps<AppProps, YearQuery> = async (qu
     currentPage,
   )
 
-  const officialPage = metadatabase[year]?.officialPage
+  const officialPage = metadatabase[String(year)]?.officialPage
 
   const props: AppProps = {
     configuration,
