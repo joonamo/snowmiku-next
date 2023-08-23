@@ -62,3 +62,25 @@
 .is-circle {
   border-radius: 100%;
 }
+
+.ribbon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(20%, 210%) rotate(45deg);
+  text-align: center;
+  width: 100px;
+  transform-origin: top right;
+  overflow: hidden;
+  white-space: nowrap;
+  text-transform: capitalize;
+  box-shadow: 0 0.4em 0.5em -0.225em rgba(10, 10, 10, 0.2);
+}
+
+.ribbon-container {
+  position: absolute;
+  top: auto;
+  right: 0;
+  width: 100px;
+  height: 100px;
+}

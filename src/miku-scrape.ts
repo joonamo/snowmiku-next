@@ -1,6 +1,7 @@
 import JSSoup, { SoupTag } from 'jssoup'
 import { getCached, storeCache } from './cache'
 import { logInfo } from './logger'
+import { metadatabase } from './metadatabase'
 
 export interface MikuResult {
   name: string
@@ -10,6 +11,8 @@ export interface MikuResult {
   views: number
   postTime: string
   authorIcon?: string
+  isFinalist: boolean
+  isWinner: boolean
 }
 
 export interface ResultsPage {
@@ -53,7 +56,7 @@ export const processPage = async (
   orderTag: string,
   page = 1,
 ): Promise<ResultsPage> => {
-  const cacheKey = `page-result-v4/${year}/${orderTag}/${page}`
+  const cacheKey = `page-result-v5/${year}/${orderTag}/${page}`
   const cached = await getCached<ResultsPage>(cacheKey)
   if (cached.data) {
     return cached.data
@@ -68,10 +71,13 @@ export const processPage = async (
   const mikuHtml = await mikuReq.text()
   const soup = new JSSoup(mikuHtml)
   const images = soup.findAll('div', 'i_main')
+  const yearFinalists = metadatabase[year]
 
   const results = images.map((item: SoupTag): MikuResult => {
     const linkElem: SoupTag = item.find(undefined, 'i_image')
     const asString = item.toString()
+    const id = (linkElem.attrs['href'] as string).replace('/t/', '')
+    
     return {
       name: item.find(undefined, 'thumb_over').text,
       author: item.find(undefined, 'i_title').text,
@@ -81,7 +87,9 @@ export const processPage = async (
       image: imageLink(linkElem.attrs['style']),
       views: getViews(asString),
       postTime: getPostTime(asString),
-      link: `https://piapro.jp${linkElem.attrs['href']}`,
+      link: `https://piapro.jp/t/${id}`,
+      isFinalist: Boolean(yearFinalists?.finalists?.includes(id)),
+      isWinner: yearFinalists?.winner === id
     }
   })
 

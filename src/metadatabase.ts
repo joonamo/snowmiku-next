@@ -1,0 +1,74 @@
+type YearMetadata = {
+  winner?: string
+  finalists?: string[]
+  officialPage?: string
+}
+
+// Look at this fancy database!
+export const metadatabase: Record<string, YearMetadata> = {
+  '2024': {
+    winner: 'H6zW',
+    finalists: ['lixB', 'J9L4', 'hSdP', '9nud', 'H6zW', 'R29y'],
+    officialPage: 'https://piapro.jp/pages/official_collabo/2024snowmiku_p7hemqu6/',
+  },
+  '2023': {
+    winner: 'sMw9',
+    finalists: ['f23G', 'MVrT', 'mUlf', 'sMw9', 'p0xi', 'iQlv'],
+    officialPage: 'https://piapro.jp/pages/official_collabo/2023snowmiku_s5gnpkaj/',
+  },
+  '2022': {
+    winner: '-URY',
+    finalists: ['NE6v', '-URY', 'IzMb', 'CPH6', 'nay8', '2m3q'],
+    officialPage: 'https://piapro.jp/pages/official_collabo/2022snowmiku_pb4vp5/',
+  },
+  '2021': {
+    winner: 'CySS',
+    finalists: ['CySS', 'ibL9', 'oJbN', '4hY9', 'bjDz', '6BM0'],
+    officialPage: 'https://piapro.jp/pages/official_collabo/2021snowmiku',
+  },
+  '2020': {
+    winner: 'HnGM',
+    finalists: ['HnGM', 'YxrR', 'saxQ', 'sWBP', 'lO2m', 'P9Kf'],
+    officialPage: 'https://piapro.jp/pages/official_collabo/2020snowmiku/',
+  },
+  '2019': {
+    winner: '70Dn',
+    finalists: ['70Dn', '1oP2', '579f', 'e6cX', 'Mne6', 'liso'],
+    officialPage: 'https://piapro.jp/pages/official_collabo/2019snowmiku/',
+  },
+  '2018': {
+    winner: 'u9XO',
+    finalists: ['u9XO', 'faiV', '5r3E', 'qyP6', '_ytg', 'xBrM'],
+    officialPage: 'https://piapro.jp/pages/official_collabo/2018snowmiku',
+  },
+  '2017': {
+    winner: 'HKTc',
+    finalists: ['HKTc', 'v0kt', '1WSt', 'S5v3', 'muF1', 'PYTJ'],
+    officialPage: 'https://piapro.jp/pages/official_collabo/2017snowmiku',
+  },
+  '2016': {
+    winner: 'uDla',
+    finalists: ['uDla', 'tfBD', 'cAEy', 'XXfw'],
+    officialPage: 'https://piapro.jp/pages/official_collabo/2016snowmiku',
+  },
+  '2015': {
+    winner: 'w8W1',
+    finalists: ['w8W1'],
+    officialPage: 'https://piapro.jp/pages/official_collabo/2015snowmiku/',
+  },
+  '2014': {
+    winner: 'xy8T',
+    finalists: ['xy8T'],
+    officialPage: 'https://piapro.jp/static/?view=2014yukimiku',
+  },
+  '2013': {
+    winner: 'XSGC',
+    finalists: ['XSGC'],
+    officialPage: 'https://piapro.jp/static/?view=2013yukimiku',
+  },
+  '2012': {
+    winner: 'Broe',
+    finalists: ['Broe'],
+    officialPage: 'https://piapro.jp/static/?view=2012yukimiku',
+  },
+}

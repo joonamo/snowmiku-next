@@ -1,24 +1,17 @@
+/* eslint-disable @next/next/no-img-element */
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import * as React from 'react'
 
 import { Disclaimer } from './Disclaimer'
 import { Paginator } from './Paginator'
+import { Ribbon } from './Ribbon'
 import { ResultsSkeleton } from './SkeletonResults'
 import { defaultViewMode } from './staticConfig'
 import { Titlebar } from './Titlebar'
+import { MikuResult } from '@/src/miku-scrape'
 
 export type ViewMode = 'Latest' | 'Popular'
-
-export interface ImageInfo {
-  name: string
-  author: string
-  link: string
-  image: string
-  views: number
-  postTime: string
-  authorIcon?: string
-}
 
 export interface Configuration {
   latestYear: number
@@ -26,7 +19,7 @@ export interface Configuration {
 }
 
 export interface AppProps {
-  imagesInfos: ImageInfo[]
+  imagesInfos: MikuResult[]
   viewMode: ViewMode
   year: string | null
   currentPage: number
@@ -104,7 +97,6 @@ const MikuPage: React.FunctionComponent<AppProps> = ({
       </Head>
       <Titlebar viewMode={viewMode} year={year} configuration={configuration} />
       <section className='section'>
-        
         <div className='container'>
           <h2 className='title'>
             {overrideTitle ?? (viewMode === 'Popular' ? 'Most Popular Entries' : 'Latest Entries')}
@@ -138,7 +130,7 @@ const MikuPage: React.FunctionComponent<AppProps> = ({
 }
 
 interface ResultsProps {
-  results: ImageInfo[]
+  results: MikuResult[]
   depth?: number
 }
 const Results: React.FunctionComponent<ResultsProps> = (props) => {
@@ -158,15 +150,19 @@ const Results: React.FunctionComponent<ResultsProps> = (props) => {
 }
 
 interface ResultProps {
-  result?: ImageInfo
+  result?: MikuResult
   depth?: number
 }
 const Result: React.FunctionComponent<ResultProps> = ({ result, depth }) => {
   return result ? (
-    <div className='tile is-parent' key={result.link}>
-      <div className='tile is-child card' key={result.link}>
-        <a href={result.link} target={result.link.startsWith('http') ? '_blank' : ''} rel="noreferrer">
-          <div className='card-image'>
+    <div className='tile is-parent is-clipped' key={result.link}>
+      <div className='tile is-child card is-clipped' key={result.link}>
+        <a
+          href={result.link}
+          target={result.link.startsWith('http') ? '_blank' : ''}
+          rel='noreferrer'
+        >
+          <div className='card-image has-background-grey-lighter'>
             <figure className='image is-16by9'>
               <img
                 className='fit-contain'
@@ -176,8 +172,11 @@ const Result: React.FunctionComponent<ResultProps> = ({ result, depth }) => {
               />
             </figure>
           </div>
-          <div className='card-content'>
-            <div className='media'>
+          <div className='card-content is-paddingless'>
+            {(result.isFinalist || result.isWinner) && (
+              <Ribbon type={result.isWinner ? 'winner' : 'finalist'} />
+            )}
+            <div className='media p-3'>
               <div className='media-left'>
                 <figure className='image is-48x48'>
                   <img
@@ -185,8 +184,8 @@ const Result: React.FunctionComponent<ResultProps> = ({ result, depth }) => {
                     src={result.authorIcon}
                     loading='lazy'
                     alt={`Avatar of ${result.author}`}
-                    width="48px"
-                    height="48px"
+                    width='48px'
+                    height='48px'
                   />
                 </figure>
               </div>
