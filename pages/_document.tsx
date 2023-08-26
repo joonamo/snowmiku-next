@@ -1,10 +1,15 @@
 import classNames from 'classnames'
 import { Html, Head, Main, NextScript } from 'next/document'
-import { inter } from './_app'
 
 export default function Document() {
   return (
-    <Html lang='en' className={classNames('has-navbar-fixed-top','has-background-info-light',inter.className)}>
+    <Html
+      lang='en'
+      className={classNames(
+        'has-navbar-fixed-top',
+        'has-background-info-light'
+      )}
+    >
       <Head>
         {/* <!-- Cloudflare Web Analytics --> */}
         <script

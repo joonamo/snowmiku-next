@@ -65,7 +65,7 @@ export const metadatabase: Record<string, YearMetadata> = {
     finalists: ['HKTc', 'v0kt', '1WSt', 'S5v3', 'muF1', 'PYTJ'],
     officialPage: 'https://piapro.jp/pages/official_collabo/2017snowmiku',
     theme: '星空/星座',
-    themeTranslated: 'Starry Sky/Constellations',
+    themeTranslated: 'Starry Sky / Constellations',
   },
   '2016': {
     winner: 'uDla',

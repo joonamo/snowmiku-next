@@ -10,7 +10,7 @@ import { ResultsSkeleton } from './SkeletonResults'
 import { defaultViewMode } from './staticConfig'
 import { Titlebar } from './Titlebar'
 import { MikuResult } from '@/src/miku-scrape'
-import { inter } from '@/pages/_app'
+import { ThemeTitle } from './ThemeTitle'
 
 export type ViewMode = 'Latest' | 'Popular'
 
@@ -30,6 +30,8 @@ export interface AppProps {
   generatedAt?: string
   overrideTitle?: string
   officialPage?: string
+  theme?: string
+  themeTranslated?: string
 }
 
 export const App: React.FC<Partial<AppProps>> = (props) => {
@@ -64,6 +66,8 @@ export const App: React.FC<Partial<AppProps>> = (props) => {
       generatedAt={props.generatedAt}
       overrideTitle={props.overrideTitle}
       officialPage={props.officialPage}
+      theme={props.theme}
+      themeTranslated={props.themeTranslated}
     />
   )
 }
@@ -78,9 +82,13 @@ const MikuPage: React.FunctionComponent<AppProps> = ({
   isLoading,
   generatedAt,
   overrideTitle,
-  officialPage
+  officialPage,
+  theme,
+  themeTranslated
 }) => {
   const title = `Snow Miku ${year ?? ''}`
+  const pageTitle =
+    overrideTitle ?? (viewMode === 'Popular' ? 'Most Popular Entries' : 'Latest Entries')
   return (
     <>
       <Head>
@@ -106,11 +114,19 @@ const MikuPage: React.FunctionComponent<AppProps> = ({
         configuration={configuration}
         officialPage={officialPage}
       />
-      <section className='section'>
+      <section className='section pt-2'>
         <div className='container'>
-          <h2 className='title'>
-            {overrideTitle ?? (viewMode === 'Popular' ? 'Most Popular Entries' : 'Latest Entries')}
-          </h2>
+          <div className='columns title-columns'>
+            <div className='column is-hidden-mobile is-narrow'>
+              <h1 className='title'>{pageTitle}</h1>
+            </div>
+            <div className='column'>
+              <ThemeTitle theme={theme} themeTranslated={themeTranslated} />
+            </div>
+            <div className='column is-hidden-tablet pt-0 pb-0'>
+              <h1 className='title'>{pageTitle}</h1>
+            </div>
+          </div>
           <div>
             <Paginator
               currentPage={currentPage}

@@ -49,7 +49,7 @@ export const getStaticPropsBase: GetStaticProps<AppProps, YearQuery> = async (qu
     currentPage,
   )
 
-  const officialPage = metadatabase[String(year)]?.officialPage
+  const metaEntry = metadatabase[String(year)]
 
   const props: AppProps = {
     configuration,
@@ -59,7 +59,9 @@ export const getStaticPropsBase: GetStaticProps<AppProps, YearQuery> = async (qu
     viewMode,
     year: String(year),
     generatedAt: new Date().toISOString(),
-    officialPage
+    officialPage: metaEntry.officialPage,
+    theme: metaEntry.theme,
+    themeTranslated: metaEntry.themeTranslated,
   }
 
   const revalidate = year === configuration.latestYear ? 5 * 60 : 60 * 60

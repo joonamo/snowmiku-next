@@ -1,6 +1,6 @@
 @charset "utf-8";
 
-$family-sans-serif: var(--font-inter);
+@import url("https://fonts.googleapis.com/css2?family=Inter&family=Yuji+Syuku&display=swap");
 
 @import "~bulma/bulma.sass";
 @import "./style.sass";
@@ -25,12 +25,6 @@ $family-sans-serif: var(--font-inter);
 @media (max-width: 600px) {
   .logo-container {
     margin-left: -20px;
-  }
-}
-
-@media (max-width: 380px) {
-  .logo-container {
-    margin-left: -32px;
   }
 }
 
@@ -96,4 +90,40 @@ $family-sans-serif: var(--font-inter);
 
 .is-tabular-numeric {
   font-variant-numeric: tabular-nums;
+}
+
+.calligraphy {
+  font-size: 6em;
+  @media (max-width: 1024px) {
+    font-size: 5em;
+  }
+  @media (max-width: 600px) {
+    font-size: 3.7em;
+  }
+  font-family: 'Yuji Syuku', serif;
+  text-align: right;
+  overflow: hidden;
+  white-space: break-spaces;
+  line-height: 1;
+}
+
+.theme-translated {
+  font-size: 2em;
+  @media (max-width: 1024px) {
+    font-size: 1.9em;
+  }
+  @media (max-width: 600px) {
+    font-size: 1.4em;
+  }
+  font-family: 'Yuji Syuku', serif;
+  text-align: right;
+  line-height: 0.8;
+}
+
+.theme-container {
+  color: hsla(207, 61%, 53%, 0.5);
+}
+
+.title-columns {
+  align-items: flex-end;
 }

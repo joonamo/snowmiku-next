@@ -16,8 +16,7 @@ export const getStaticProps: GetStaticProps<AppProps> = async () => {
   const page = 1
 
   const {pageCount, results} = await processPage(String(year), defaultViewMode === 'Latest' ? latestTag : popularTag, page)
-  const officialPage = metadatabase[String(year)]?.officialPage
-
+  const metaEntry = metadatabase[String(year)]
   
   const props: AppProps = {
     configuration,
@@ -27,7 +26,9 @@ export const getStaticProps: GetStaticProps<AppProps> = async () => {
     viewMode: defaultViewMode,
     year: String(year),
     generatedAt: new Date().toISOString(),
-    officialPage,
+    officialPage: metaEntry.officialPage,
+    theme: metaEntry.theme,
+    themeTranslated: metaEntry.themeTranslated
   }
 
   return {
