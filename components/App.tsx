@@ -10,6 +10,7 @@ import { ResultsSkeleton } from './SkeletonResults'
 import { defaultViewMode } from './staticConfig'
 import { Titlebar } from './Titlebar'
 import { MikuResult } from '@/src/miku-scrape'
+import { inter } from '@/pages/_app'
 
 export type ViewMode = 'Latest' | 'Popular'
 

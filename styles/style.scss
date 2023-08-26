@@ -1,4 +1,7 @@
 @charset "utf-8";
+
+$family-sans-serif: var(--font-inter);
+
 @import "~bulma/bulma.sass";
 @import "./style.sass";
 
