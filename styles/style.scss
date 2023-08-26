@@ -28,6 +28,12 @@ $family-sans-serif: var(--font-inter);
   }
 }
 
+@media (max-width: 400px) {
+  .logo-container {
+    margin-left: -32px;
+  }
+}
+
 @media (max-width: 320px) {
   .logo-container {
     margin-left: -42px;

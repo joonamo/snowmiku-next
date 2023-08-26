@@ -93,6 +93,7 @@ const MikuPage: React.FunctionComponent<AppProps> = ({
         />
 
         <link rel='icon' type='image/png' href='/favicon.png' />
+        <meta name='theme-color' content='hsl(207, 61%, 53%)' />
 
         <meta property='og:title' content={title} />
         <meta property='og:type' content='website' />
