@@ -181,7 +181,7 @@ interface ResultProps {
 }
 const Result: React.FunctionComponent<ResultProps> = ({ result, depth }) => {
   return result ? (
-    <div className='tile is-parent is-clipped' key={result.link}>
+    <div className='tile is-parent' key={result.link}>
       <div className='tile is-child card is-clipped' key={result.link}>
         <a
           href={result.link}
