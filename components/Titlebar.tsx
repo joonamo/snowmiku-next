@@ -5,6 +5,7 @@ import * as React from 'react'
 import { Configuration, ViewMode } from './App'
 import { ExternalLink } from './ExternalLink'
 import { Logo } from './logo'
+import { metadatabase } from '@/src/metadatabase'
 
 interface TitlebarProps {
   viewMode: ViewMode
@@ -212,14 +213,15 @@ const YearSelectors: React.FunctionComponent<YearSelectorsProps> = ({
   if (configuration) {
     const selectors = []
     for (let year = configuration.latestYear; year >= configuration.firstYear; year--) {
+      const themeTranslated = metadatabase[String(year)]?.themeTranslated ?? undefined
       selectors.push(
         <Link
-          className='navbar-item'
+          className='navbar-item is-tabular-numeric'
           onClick={closeMenu}
           href={`/${year}`}
           key={`year-selector-${year}`}
         >
-          {year}
+          {year}{themeTranslated ? `: ${themeTranslated}`: ''}
         </Link>,
       )
     }
