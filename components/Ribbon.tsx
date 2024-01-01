@@ -5,7 +5,7 @@ type Props = {
   type: 'winner' | 'finalist'
 }
 export const Ribbon: React.FC<Props> = ({ type }) => (
-  <div className='ribbon-container is-clipped'>
+  <div className='ribbon-container is-clipped' aria-hidden='true' aria-disabled='true'>
     <div
       className={classNames(
         'ribbon',
