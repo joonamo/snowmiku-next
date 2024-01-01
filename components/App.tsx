@@ -219,7 +219,7 @@ const Result: React.FunctionComponent<ResultProps> = ({ result, depth }) => {
                 <p className='title is-5'>{result.name}</p>
                 <p className='subtitle is-5 mb-1'>{result.author}</p>
                 <p className='subtitle is-7'>
-                  {result.postTime} views {result.views.toLocaleString()}
+                  {result.postTime} views {result.views.toLocaleString('en-US')}
                 </p>
               </div>
             </div>

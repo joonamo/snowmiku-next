@@ -9,15 +9,19 @@ export default App
 export const getStaticProps: GetStaticProps<AppProps> = async () => {
   const configuration = {
     firstYear: 2012,
-    latestYear: await getLatestYear()
+    latestYear: await getLatestYear(),
   }
-  
+
   const year = configuration.latestYear
   const page = 1
 
-  const {pageCount, results} = await processPage(String(year), defaultViewMode === 'Latest' ? latestTag : popularTag, page)
+  const { pageCount, results } = await processPage(
+    String(year),
+    defaultViewMode === 'Latest' ? latestTag : popularTag,
+    page,
+  )
   const metaEntry = metadatabase[String(year)]
-  
+
   const props: AppProps = {
     configuration,
     currentPage: 1,
@@ -26,9 +30,13 @@ export const getStaticProps: GetStaticProps<AppProps> = async () => {
     viewMode: defaultViewMode,
     year: String(year),
     generatedAt: new Date().toISOString(),
-    officialPage: metaEntry.officialPage,
-    theme: metaEntry.theme,
-    themeTranslated: metaEntry.themeTranslated
+    ...(metaEntry
+      ? {
+          officialPage: metaEntry.officialPage,
+          theme: metaEntry.theme,
+          themeTranslated: metaEntry.themeTranslated,
+        }
+      : {}),
   }
 
   return {
