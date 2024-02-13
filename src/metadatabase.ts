@@ -11,6 +11,13 @@ export const defaultThemeTranslated = 'Snow Miku'
 
 // Look at this fancy database!
 export const metadatabase: Record<string, YearMetadata> = {
+  '2025': {
+    winner: '',
+    finalists: [],
+    officialPage: 'https://piapro.jp/pages/official_collabo/2025snowmiku_a4suj/',
+    theme: 'キラキラスノーマテリアル',
+    themeTranslated: 'Glitter Snow',
+  },
   '2024': {
     winner: 'H6zW',
     finalists: ['lixB', 'J9L4', 'hSdP', '9nud', 'H6zW', 'R29y'],
