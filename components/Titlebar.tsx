@@ -11,7 +11,7 @@ interface TitlebarProps {
   viewMode: ViewMode
   year: string | null
   configuration: Configuration | null
-  officialPage?: string
+  officialPage?: string | null
 }
 
 export const Titlebar: React.FunctionComponent<TitlebarProps> = ({

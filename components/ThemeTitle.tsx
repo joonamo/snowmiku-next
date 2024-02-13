@@ -1,8 +1,8 @@
 import { defaultTheme, defaultThemeTranslated } from '@/src/metadatabase'
 
 type Props = {
-  theme?: string
-  themeTranslated?: string
+  theme?: string | null
+  themeTranslated?: string | null
 }
 
 export const ThemeTitle: React.FC<Props> = ({ theme, themeTranslated }) => (

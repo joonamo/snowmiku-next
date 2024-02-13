@@ -29,9 +29,9 @@ export interface AppProps {
   isLoading?: boolean
   generatedAt?: string
   overrideTitle?: string
-  officialPage?: string
-  theme?: string
-  themeTranslated?: string
+  officialPage?: string | null
+  theme?: string | null
+  themeTranslated?: string | null
 }
 
 export const App: React.FC<Partial<AppProps>> = (props) => {
@@ -65,9 +65,9 @@ export const App: React.FC<Partial<AppProps>> = (props) => {
       year={props.year ?? null}
       generatedAt={props.generatedAt}
       overrideTitle={props.overrideTitle}
-      officialPage={props.officialPage}
-      theme={props.theme}
-      themeTranslated={props.themeTranslated}
+      officialPage={props.officialPage ?? null}
+      theme={props.theme ?? null}
+      themeTranslated={props.themeTranslated ?? null}
     />
   )
 }
