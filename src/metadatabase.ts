@@ -16,7 +16,7 @@ export const metadatabase: Record<string, YearMetadata> = {
     finalists: [],
     officialPage: 'https://piapro.jp/pages/official_collabo/2025snowmiku_a4suj/',
     theme: 'キラキラ​スノー​マテリアル',
-    themeTranslated: 'Glitter Snow Material',
+    themeTranslated: 'Glittering Snow Material',
   },
   '2024': {
     winner: 'H6zW',
