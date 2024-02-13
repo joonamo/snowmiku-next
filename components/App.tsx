@@ -30,7 +30,7 @@ export interface AppProps {
   generatedAt?: string
   overrideTitle?: string
   officialPage?: string | null
-  theme?: string | null
+  theme?: string[] | null
   themeTranslated?: string | null
 }
 

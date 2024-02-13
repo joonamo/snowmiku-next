@@ -100,11 +100,25 @@
   @media (max-width: 600px) {
     font-size: 3.7em;
   }
+
   font-family: 'Yuji Syuku', serif;
   text-align: right;
   overflow: hidden;
   white-space: break-spaces;
   line-height: 1;
+
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+.long-title {
+  font-size: 4em;
+  @media (max-width: 1024px) {
+    font-size: 3.5em;
+  }
+  @media (max-width: 600px) {
+    font-size: 2.7em;
+  }
 }
 
 .theme-translated {
