@@ -1,0 +1,6 @@
+# copy this file to .env
+S3_BUCKET=bucket-name-here
+S3_KEY=key
+S3_SECRET=secret
+S3_URL=url
+NEXT_PUBLIC_DEFAULT_VIEW_MODE=Latest # Latest or Popular
