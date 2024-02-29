@@ -43,7 +43,7 @@ export const getStaticPropsBase: GetStaticProps<AppProps, YearQuery> = async (qu
       ? defaultViewMode
       : 'Popular'
 
-  const { pageCount, results } = await processPage(
+  const { pageCount, results, piaproUrl } = await processPage(
     String(year),
     viewMode === 'Latest' ? latestTag : popularTag,
     currentPage,
@@ -62,6 +62,7 @@ export const getStaticPropsBase: GetStaticProps<AppProps, YearQuery> = async (qu
     officialPage: metaEntry?.officialPage ?? null,
     theme: metaEntry?.theme ?? null,
     themeTranslated: metaEntry?.themeTranslated ?? null,
+    piaproUrl: piaproUrl
   }
 
   const revalidate = year === configuration.latestYear ? 5 * 60 : 60 * 60

@@ -32,6 +32,7 @@ export interface AppProps {
   officialPage?: string | null
   theme?: string[] | null
   themeTranslated?: string | null
+  piaproUrl?: string | null
 }
 
 export const App: React.FC<Partial<AppProps>> = (props) => {
@@ -68,6 +69,7 @@ export const App: React.FC<Partial<AppProps>> = (props) => {
       officialPage={props.officialPage ?? null}
       theme={props.theme ?? null}
       themeTranslated={props.themeTranslated ?? null}
+      piaproUrl={props.piaproUrl ?? null}
     />
   )
 }
@@ -84,7 +86,8 @@ const MikuPage: React.FunctionComponent<AppProps> = ({
   overrideTitle,
   officialPage,
   theme,
-  themeTranslated
+  themeTranslated,
+  piaproUrl
 }) => {
   const title = `Snow Miku ${year ?? ''}`
   const pageTitle =
@@ -113,6 +116,7 @@ const MikuPage: React.FunctionComponent<AppProps> = ({
         year={year}
         configuration={configuration}
         officialPage={officialPage}
+        piaproUrl={piaproUrl}
       />
       <section className='section pt-2'>
         <div className='container'>

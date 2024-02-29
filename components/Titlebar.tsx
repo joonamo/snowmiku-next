@@ -12,6 +12,7 @@ interface TitlebarProps {
   year: string | null
   configuration: Configuration | null
   officialPage?: string | null
+  piaproUrl?: string | null
 }
 
 export const Titlebar: React.FunctionComponent<TitlebarProps> = ({
@@ -19,6 +20,7 @@ export const Titlebar: React.FunctionComponent<TitlebarProps> = ({
   year,
   configuration,
   officialPage,
+  piaproUrl
 }) => {
   const [burgerOpen, setBurgerOpen] = React.useState<boolean>(false)
   const [sortDropdownOpen, setSortDropdownOpen] = React.useState<boolean>(false)
@@ -143,7 +145,16 @@ export const Titlebar: React.FunctionComponent<TitlebarProps> = ({
 
           {officialPage && (
             <a href={officialPage} target='_blank' className='navbar-item'>
-              <span>Official Design Contest page</span>
+              <span>Design Contest</span>
+              <span className='icon'>
+                <ExternalLink />
+              </span>
+            </a>
+          )}
+
+          {piaproUrl && (
+            <a href={piaproUrl} target='_blank' className='navbar-item'>
+              <span>Piapro</span>
               <span className='icon'>
                 <ExternalLink />
               </span>
