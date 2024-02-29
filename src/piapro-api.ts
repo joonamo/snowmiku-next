@@ -52,7 +52,7 @@ export const getYearTag = (year: string) => {
 export const paginatorRegex = /new Paginator\('_paginator', ([0-9]*)/
 const pageCount = (page?: SoupTag) => {
   const pager = page?.find(undefined, 'pager_list')
-  let last = pager.contents[pager.contents.length - 1]
+  const last = pager.contents[pager.contents.length - 1]
   return parseInt(last.text, 10)
 }
 
@@ -86,9 +86,9 @@ export const processPage = async (
       name: item.find(undefined, 'tmblist_list_title').text,
       author: item.find(undefined, 'tmblist_list_creator_txt').text,
       authorIcon:
-        item.find(undefined, 'tmblist_list_creator_userimg')?.find('img').attrs['src'].replace('_0048\.', '_0150\.') ??
+        item.find(undefined, 'tmblist_list_creator_userimg')?.find('img').attrs['src'].replace('_0048.', '_0150.') ??
         null,
-      image: item.find(undefined, 'tmblist_list_tmb_inner')?.find('img').attrs['src'].replace('0250_0250\.', '0860_0600\.'),
+      image: item.find(undefined, 'tmblist_list_tmb_inner')?.find('img').attrs['src'].replace('0250_0250.', '0860_0600.'),
       link: `https://piapro.jp/t/${id}`,
       isFinalist: Boolean(yearFinalists?.finalists?.includes(id)),
       isWinner: yearFinalists?.winner === id,

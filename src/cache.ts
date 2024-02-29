@@ -27,9 +27,9 @@ export const getCached = async <T>(key: string, allowStale = false): Promise<cac
       new GetObjectCommand({
         Bucket,
         Key: key,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       }),
     )
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     .catch((e: any) => {
       if (e.Code === 'NoSuchKey') {
         logInfo('Cache miss', { key })
