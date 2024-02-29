@@ -1,6 +1,6 @@
 import { App, AppProps } from "@/components/App"
 import { defaultViewMode } from "@/components/staticConfig"
-import { getLatestYear } from "@/src/miku-scrape"
+import { getLatestYear } from "@/src/piapro-api"
 import { GetStaticProps } from "next"
 
 export default App

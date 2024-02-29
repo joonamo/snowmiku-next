@@ -9,7 +9,7 @@ import { Ribbon } from './Ribbon'
 import { ResultsSkeleton } from './SkeletonResults'
 import { defaultViewMode } from './staticConfig'
 import { Titlebar } from './Titlebar'
-import { MikuResult } from '@/src/miku-scrape'
+import { MikuResult } from '@/src/piapro-api'
 import { ThemeTitle } from './ThemeTitle'
 
 export type ViewMode = 'Latest' | 'Popular'
@@ -218,9 +218,11 @@ const Result: React.FunctionComponent<ResultProps> = ({ result, depth }) => {
               <div className='media-content'>
                 <p className='title is-5'>{result.name}</p>
                 <p className='subtitle is-5 mb-1'>{result.author}</p>
+                {/* 
                 <p className='subtitle is-7'>
                   {result.postTime} views {result.views.toLocaleString('en-US')}
-                </p>
+                </p> 
+                */}
               </div>
             </div>
           </div>

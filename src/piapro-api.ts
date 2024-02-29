@@ -30,33 +30,38 @@ export const getYearTag = (year: string) => {
   return `%EF%BC%92%EF%BC%90%EF%BC%9${tens}%EF%BC%9${ones}`
 }
 
-const imageRegex = /url\(\/\/(.*)0150_0150(\..*)\)/
-const imageLink = (styleAttr: string) => {
-  const re = imageRegex.exec(styleAttr)
-  return `https://${re?.[1]}0740_0500${re?.[2]}`
-}
+// Deprecated
+// const imageRegex = /url\(\/\/(.*)0250_0250(\..*)\)/
+// const imageLink = (styleAttr: string) => {
+//   const re = imageRegex.exec(styleAttr)
+//   return `https://${re?.[1]}0740_0500${re?.[2]}`
+// }
 
-const viewsRegex = /閲覧数:([\d,]+)/
-const getViews = (html: string) => {
-  const re = viewsRegex.exec(html)
-  return (re && parseInt(re[1].replace(',', ''), 10)) ?? 0
-}
+// const viewsRegex = /閲覧数:([\d,]+)/
+// const getViews = (html: string) => {
+//   const re = viewsRegex.exec(html)
+//   return (re && parseInt(re[1].replace(',', ''), 10)) ?? 0
+// }
 
-const postTimeRegex = /(\d\d\d\d\/\d\d\/\d\d \d\d:\d\d)/ // Beautiful
-const getPostTime = (html: string) => {
-  const re = postTimeRegex.exec(html)
-  return re?.[1] ?? ''
-}
+// const postTimeRegex = /(\d\d\d\d\/\d\d\/\d\d \d\d:\d\d)/ // Beautiful
+// const getPostTime = (html: string) => {
+//   const re = postTimeRegex.exec(html)
+//   return re?.[1] ?? ''
+// }
 
 export const paginatorRegex = /new Paginator\('_paginator', ([0-9]*)/
-const pageCount = (page?: string) => Number((page && paginatorRegex.exec(page)?.[1]) ?? 1)
+const pageCount = (page?: SoupTag) => {
+  const pager = page?.find(undefined, 'pager_list')
+  let last = pager.contents[pager.contents.length - 1]
+  return parseInt(last.text, 10)
+}
 
 export const processPage = async (
   year: string,
   orderTag: string,
   page = 1,
 ): Promise<ResultsPage> => {
-  const cacheKey = `page-result-v5/${year}/${orderTag}/${page}`
+  const cacheKey = `page-result-v6/${year}/${orderTag}/${page}`
   const cached = await getCached<ResultsPage>(cacheKey)
   if (cached.data) {
     return cached.data
@@ -70,31 +75,32 @@ export const processPage = async (
   console.log(`got response`, { status: mikuReq.status, ok: mikuReq.ok })
   const mikuHtml = await mikuReq.text()
   const soup = new JSSoup(mikuHtml)
-  const images = soup.findAll('div', 'i_main')
+  const images = soup.find(undefined, 'tmblist_list').contents
   const yearFinalists = metadatabase[year]
 
   const results = images.map((item: SoupTag): MikuResult => {
-    const linkElem: SoupTag = item.find(undefined, 'i_image')
-    const asString = item.toString()
-    const id = (linkElem.attrs['href'] as string).replace('/t/', '')
-    
+    const linkElem: SoupTag = item.find('a')
+    const id = (linkElem.attrs['href'] as string)
+
     return {
-      name: item.find(undefined, 'thumb_over').text,
-      author: item.find(undefined, 'i_title').text,
+      name: item.find(undefined, 'tmblist_list_title').text,
+      author: item.find(undefined, 'tmblist_list_creator_txt').text,
       authorIcon:
-        item.find(undefined, 'i_icon')?.find('img').attrs['src'].replace('_0048.', '_0150.') ??
+        item.find(undefined, 'tmblist_list_creator_userimg')?.find('img').attrs['src'].replace('_0048\.', '_0150\.') ??
         null,
-      image: imageLink(linkElem.attrs['style']),
-      views: getViews(asString),
-      postTime: getPostTime(asString),
+      image: item.find(undefined, 'tmblist_list_tmb_inner')?.find('img').attrs['src'].replace('0250_0250\.', '0860_0600\.'),
       link: `https://piapro.jp/t/${id}`,
       isFinalist: Boolean(yearFinalists?.finalists?.includes(id)),
-      isWinner: yearFinalists?.winner === id
+      isWinner: yearFinalists?.winner === id,
+
+      // Views and post time not available in current Piapro listing
+      views: 0,
+      postTime: '',
     }
   })
 
   const result = {
-    pageCount: pageCount(mikuHtml),
+    pageCount: pageCount(soup),
     results,
     piaproUrl,
   }

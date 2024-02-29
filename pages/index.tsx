@@ -1,4 +1,4 @@
-import { getLatestYear, processPage, popularTag, latestTag } from '@/src/miku-scrape'
+import { getLatestYear, processPage, popularTag, latestTag } from '@/src/piapro-api'
 import { GetStaticProps } from 'next'
 import { App, AppProps } from '@/components/App'
 import { defaultViewMode } from '@/components/staticConfig'
