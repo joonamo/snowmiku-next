@@ -71,7 +71,7 @@ export const processPage = async (
   orderTag: string,
   page = 1,
 ): Promise<ResultsPage> => {
-  const cacheKey = `page-result-v6/${year}/${orderTag}/${page}`
+  const cacheKey = `page-result-v7/${year}/${orderTag}/${page}`
   const cached = await getCached<ResultsPage>(cacheKey)
   if (cached.data) {
     return cached.data
@@ -85,11 +85,12 @@ export const processPage = async (
   console.log(`got response`, { status: mikuReq.status, ok: mikuReq.ok })
   const mikuHtml = await mikuReq.text()
 
-  const result = processHtml(mikuHtml, year)
+  const processed = processHtml(mikuHtml, year)
+  const result = { ...processed, piaproUrl }
 
   await storeCache(cacheKey, result, 5 * 60 * 1000)
 
-  return { ...result, piaproUrl }
+  return result
 }
 
 export const processHtml = (mikuHtml: string, year: string) => {
