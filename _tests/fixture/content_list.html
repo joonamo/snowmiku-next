@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta charset="utf-8" />
+    <meta name="description" content="piapro example" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <title>piapro example</title>
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="piapro" />
+    <meta property="og:description" content="piapro example" />
+    <meta property="og:site_name" content="piapro example" />
+    <meta property="og:locale" content="ja_JP" />
+    <meta property="og:url" content="https://example.com/" />
+    <meta property="og:image" content="https://example.com/r/images/header/ogp.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:creator" content="@example" />
+    <meta name="twitter:site" content="@example" />
+    <meta name="twitter:title" content="[piapro example]" />
+    <meta name="twitter:description" content="piapro example" />
+    <meta name="twitter:image" content="https://example.com/r/images/header/ogp.png" />
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="/r/css/reset.css?20240227" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/lity/2.4.1/lity.min.css"
+      integrity="sha512-UiVP2uTd2EwFRqPM4IzVXuSFAzw+Vo84jxICHVbOA1VZFUyr4a6giD9O3uvGPFIuB2p3iTnfDVLnkdY7D/SJJQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
+    />
+    <link rel="stylesheet" type="text/css" href="/r/css/style.css?20240227" />
+
+    <script type="text/javascript">
+      window.dataLayer = window.dataLayer || []
+      dataLayer.push({
+        isLogin: 'NO_LOGIN',
+      })
+    </script>
+    <script>
+      ;(function (w, d, s, l, i) {
+        w[l] = w[l] || []
+        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' })
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer' ? '&l=' + l : ''
+        j.async = true
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl
+        f.parentNode.insertBefore(j, f)
+      })(window, document, 'script', 'dataLayer', 'GTM-PZ4FKBK')
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="/r/js/css_browser_selector.js?20240227"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/lity/2.4.1/lity.min.js"
+      integrity="sha512-UU0D/t+4/SgJpOeBYkY+lG16MaNF8aqmermRIz8dlmQhOlBnw6iQrnt4Ijty513WB3w+q4JO75IX03lDj6qQNA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="/r/js/function.js?20240227"></script>
+    <script src="/r/js/piapro.js?20240227"></script>
+
+    <link rel="icon" href="/r/images/header/favicon.ico" />
+    <link
+      rel="apple-touch-icon"
+      type="image/png"
+      href="/r/images/header/apple-touch-icon-180x180.png"
+    />
+    <link rel="icon" type="image/png" href="/r/images/header/icon-192x192.png" />
+  </head>
+
+  <body>
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-PZ4FKBK"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
+    <div id="wrapper">
+      <header class="header">
+        <div class="header_inner">
+          <div class="header_cont">
+            <div class="header_main_menu_wrapper">
+              <div class="header_main_menu_btn header_btn">
+                <a href="#header_main_menu" data-lity="data-lity"
+                  ><span class="icon_menu"></span
+                ></a>
+              </div>
+
+              <div id="header_main_menu" class="header_main_menu lity-hide" data-lity-close>
+                <div class="header_main_menu_cont">
+                  <div class="header_main_menu_top">
+                    <p class="header_logo">
+                      <a href="/"><img src="/r/images/logo_piapro.svg" alt="piapro" /></a>
+                    </p>
+                    <div class="modal_box_close" data-lity-close="">
+                      <span class="icon_close"></span>
+                    </div>
+                  </div>
+                  <div class="header_main_menu_list_wrap">
+                    <p class="header_main_menu_list_heading">作品一覧</p>
+                    <ul class="header_main_menu_list">
+                      <li><a href="/music/">オンガク</a></li>
+                      <li><a href="/illust/">イラスト</a></li>
+                      <li><a href="/text/">テキスト</a></li>
+                      <li><a href="/3dm/">3Dモデル</a></li>
+                    </ul>
+                    <hr />
+                    <ul class="header_main_menu_list">
+                      <li><a href="/official_collabo/">公式コラボ</a></li>
+                    </ul>
+                    <hr />
+                    <p class="header_main_menu_list_heading">その他</p>
+                    <ul class="header_main_menu_list">
+                      <li><a href="/help/">ヘルプ</a></li>
+                      <li><a href="/faq/">よくある質問</a></li>
+                      <li><a href="/intro/">ピアプロとは</a></li>
+                      <li>
+                        <a href="/license/character_guideline">キャラクター利用のガイドライン</a>
+                      </li>
+                      <li><a href="/characters/">投稿可能なキャラクター</a></li>
+                      <li><a href="/about_us/">ABOUT US</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <p class="header_logo">
+              <a href="/"><img src="/r/images/logo_piapro.svg" alt="piapro" /></a>
+            </p>
+            <div class="header_globalnav">
+              <nav>
+                <ul class="header_globalnav_list">
+                  <li class="">
+                    <a href="/music/">作品一覧</a>
+                    <ul class="header_globalnav_list_sub">
+                      <li><a href="/music/">オンガク</a></li>
+                      <li><a href="/illust/">イラスト</a></li>
+                      <li><a href="/text/">テキスト</a></li>
+                      <li><a href="/3dm/">3Dモデル</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="/official_collabo/">公式コラボ</a></li>
+                </ul>
+              </nav>
+            </div>
+            <div id="header_search_wrapper" class="header_search_wrapper">
+              <div class="header_search">
+                <form action="/search/" method="get" id="_from_search">
+                  <input type="hidden" name="searchedView" value="audio" id="_header_search_view" />
+                  <div class="header_search_inner">
+                    <div class="header_search_select custom_select">
+                      <div class="custom_select_trigger">
+                        <p>オンガク</p>
+                        <span class="icon_expand_more"></span>
+                      </div>
+                      <ul class="custom_select_option_list" id="_header_search_select_view">
+                        <li class="custom_select_option option_selected" data-value="audio">
+                          オンガク
+                        </li>
+                        <li class="custom_select_option" data-value="image">イラスト</li>
+                        <li class="custom_select_option" data-value="text">テキスト</li>
+                        <li class="custom_select_option" data-value="3dm">3Dモデル</li>
+                        <li class="custom_select_option" data-value="tag">タグ</li>
+                        <li class="custom_select_option" data-value="user">ユーザー</li>
+                      </ul>
+                    </div>
+
+                    <div class="header_search_input_area">
+                      <input
+                        type="text"
+                        name="keyword"
+                        value=""
+                        placeholder="作品・ユーザーを検索"
+                      />
+                      <div class="header_search_btn">
+                        <button class="icon_search" type="submit" form="_from_search"></button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="header_search_popup_btn">
+                <div class="header_btn custom_toggle_btn" toggle-target="#header_search_wrapper">
+                  <span class="icon_search"></span><span class="icon_close"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="header_login">
+              <div class="header_login_btn"><a href="/login/">ログイン・新規登録</a></div>
+            </div>
+
+            <div class="header_other">
+              <div class="custom_popup_menu">
+                <div class="header_btn custom_popup_menu_btn">
+                  <span class="icon_more_horiz"></span>
+                </div>
+                <div class="header_other_menu custom_popup_menu_content">
+                  <ul class="header_other_menu_list custom_popup_menu_list">
+                    <li><a href="/help/">ヘルプ</a></li>
+                    <li><a href="/intro/">ピアプロとは</a></li>
+                    <li><a href="/characters/">投稿可能なキャラクター</a></li>
+                    <li>
+                      <a href="/license/character_guideline">キャラクター利用のガイドライン</a>
+                    </li>
+                    <li><a href="/faq/">よくある質問</a></li>
+                    <li><a href="/about_us/">ABOUT US</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <div class="main page_tag-search_list">
+        <div class="center_googleads">
+          <div class="pc tb">
+            <!--  ad tags Size: 468x60 ZoneId:1558314-->
+            <script
+              type="text/javascript"
+              src="https://js.example.com/a.js"
+            ></script>
+          </div>
+          <div class="sp">
+            <!--  ad tags Size: 320x50 ZoneId:1558315-->
+            <script
+              type="text/javascript"
+              src="https://js.example.com/a.js"
+            ></script>
+          </div>
+        </div>
+
+        <div class="page_title_wrapper">
+          <div class="section_inner">
+            <div class="page_title_outer">
+              <h1 class="page_title">Snow Miku example</h1>
+              <p class="search_list_title_sub">
+                <span class="search_list_title_sub_num">390</span>件
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tmblist">
+          <div class="tmblist_categorytab">
+            <div class="section_inner">
+              <ul class="tmblist_categorytab_list">
+                <li>
+                  <a
+                    href="/content_list/?view=audio&amp;tag=tag&amp;order=sd"
+                    >オンガク</a
+                  >
+                </li>
+                <li>
+                  <p>イラスト</p>
+                </li>
+                <li>
+                  <a
+                    href="/content_list/?view=text&amp;tag=tag&amp;order=sd"
+                    >テキスト</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/content_list/?view=3dm&amp;tag=tag&amp;order=sd"
+                    >3Dモデル</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tmblist_cont">
+            <div class="section_inner">
+              <div class="tmblist_sort">
+                <div class="tmblist_sort_inner">
+                  <div class="tmblist_sort_box_wrapper">
+                    <div class="tmblist_sort_box">
+                      <div class="tmblist_sort_select custom_select">
+                        <div class="custom_select_trigger">
+                          <p>表示順</p>
+                          <span class="icon_expand_more"></span>
+                        </div>
+                        <ul class="custom_select_option_list">
+                          <li class="custom_select_option option_selected">
+                            <a
+                              href="/content_list/?tag=tag&amp;view=image&amp;order=sd"
+                              >新着順</a
+                            >
+                          </li>
+                          <li class="custom_select_option">
+                            <a
+                              href="/content_list/?tag=tag&amp;view=image&amp;order=cv"
+                              >閲覧数順</a
+                            >
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tmblist_list_section_wrapper">
+                <div class="tmblist_list_section">
+                  <ul class="tmblist_list">
+                    <li>
+                      <a href="/t/AAAA">
+                        <div class="tmblist_list_tmb tmb_illust">
+                          <div class="tmblist_list_tmb_inner">
+                            <img
+                              src="//cdn.example.com/thumb_i/hf/aaaaa_20240229153653_0250_0250.png"
+                              alt="SNOW MIKU a"
+                            />
+                          </div>
+                        </div>
+                        <div class="tmblist_list_txt">
+                          <p class="tmblist_list_title">SNOW MIKU a</p>
+                        </div> </a
+                      ><a href="/User_Enter" class="tmblist_list_creator">
+                        <p class="tmblist_list_creator_userimg userimg">
+                          <img
+                            src="//cdn.example.com/icon_u/873/111111_20240229160752_0072.jpg"
+                            alt="user 1"
+                          />
+                        </p>
+                        <p class="tmblist_list_creator_txt">user 1</p>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="/t/BBBB">
+                        <div class="tmblist_list_tmb tmb_illust">
+                          <div class="tmblist_list_tmb_inner">
+                            <img
+                              src="//cdn.example.com/thumb_i/eh/bbbbbb_20240229130931_0250_0250.png"
+                              alt="雪ミク b"
+                            />
+                          </div>
+                        </div>
+                        <div class="tmblist_list_txt">
+                          <p class="tmblist_list_title">雪ミク b</p>
+                        </div> </a
+                      ><a href="/lynsneakers" class="tmblist_list_creator">
+                        <p class="tmblist_list_creator_userimg userimg">
+                          <img
+                            src="//cdn.example.com/icon_u/845/22222_20240223120025_0072.jpg"
+                            alt="user 2"
+                          />
+                        </p>
+                        <p class="tmblist_list_creator_txt">user 2</p>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="/t/CCCC">
+                        <div class="tmblist_list_tmb tmb_illust">
+                          <div class="tmblist_list_tmb_inner">
+                            <img
+                              src="//cdn.example.com/thumb_i/w4/ccccc_20240229063132_0250_0250.png"
+                              alt="スノーミク c"
+                            />
+                          </div>
+                        </div>
+                        <div class="tmblist_list_txt">
+                          <p class="tmblist_list_title">スノーミク c</p>
+                        </div> </a
+                      ><a href="/user 3" class="tmblist_list_creator">
+                        <p class="tmblist_list_creator_userimg userimg">
+                          <img
+                            src="//cdn.example.com/icon_u/449/33333_20240217035936_0072.jpg"
+                            alt="maimaiyy"
+                          />
+                        </p>
+                        <p class="tmblist_list_creator_txt">user 3</p>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="pager">
+                <ul class="pager_list">
+                  <li class="now">
+                    <p>1</p>
+                  </li>
+                  <li>
+                    <a
+                      href="/content_list/?view=image&amp;tag=tag&amp;order=sd&amp;page=2"
+                      >2</a
+                    >
+                  </li>
+                  <li>
+                    <p><span class="icon_more_horiz"></span></p>
+                  </li>
+
+                  <li>
+                    <a
+                      href="/content_list/?view=image&amp;tag=tag&amp;order=sd&amp;page=10"
+                      >10</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="/content_list/?view=image&amp;tag=tag&amp;order=sd&amp;page=2"
+                      ><span class="icon_forward"></span
+                    ></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="footer">
+        <div class="footer_inner">
+          <div class="footer_bnr_area">
+            <div class="footer_googleads">
+              <div class="pc">
+                <!--  ad tags Size: 728x90 ZoneId:1558281-->
+                <script
+                  type="text/javascript"
+                  src="https://js.example.com/a.js"
+                ></script>
+              </div>
+              <div class="tb">
+                <!--  ad tags Size: 468x60 ZoneId:1558283-->
+                <script
+                  type="text/javascript"
+                  src="https://js.example.com/a.js"
+                ></script>
+              </div>
+              <div class="sp">
+                <!--  ad tags Size: 320x50 ZoneId:1558284-->
+                <script
+                  type="text/javascript"
+                  src="https://js.example.com/a.js"
+                ></script>
+              </div>
+            </div>
+            <div class="footer_jasrac">
+              <div class="footer_jasrac_img"><img src="/r/images/footer_jasrac.jpg" alt="" /></div>
+              <div class="footer_jasrac_txt">
+                <p>abc</p>
+                <p>123</p>
+              </div>
+            </div>
+          </div>
+          <div class="footer_nav">
+            <ul class="footer_nav_list">
+              <li><a href="/a">a</a></li>
+              <li><a href="/b">b</a></li>
+              <li><a href="/c">c</a></li>
+              <li><a href="/d">d</a></li>
+              <li><a href="/e">e</a></li>
+              <li><a href="https://example.com" target="_blank">example</a></li>
+              <li><a href="https://example.com" target="_blank">example</a></li>
+              <li><a href="/f/" target="_blank">f</a></li>
+            </ul>
+          </div>
+          <p class="footer_copyright">example</p>
+        </div>
+      </footer>
+      <div class="page_bottom_btn">
+        <p id="btn_pagetop" class="hide">
+          <a href="#header"><span class="icon_upward"></span></a>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

@@ -2,6 +2,7 @@ import JSSoup, { SoupTag } from 'jssoup'
 import { getCached, storeCache } from './cache'
 import { logInfo } from './logger'
 import { metadatabase } from './metadatabase'
+import { randomUUID } from 'node:crypto'
 
 export interface MikuResult {
   name: string
@@ -28,6 +29,15 @@ export const getYearTag = (year: string) => {
   const tens = year[year.length - 2]
   const ones = year[year.length - 1]
   return `%EF%BC%92%EF%BC%90%EF%BC%9${tens}%EF%BC%9${ones}`
+}
+
+const getId = (href?: string) => {
+  if (!href) {
+    return randomUUID()
+  }
+
+  const split = href.split('/')
+  return split[split.length - 1]
 }
 
 // Deprecated
@@ -74,13 +84,22 @@ export const processPage = async (
   const mikuReq = await fetch(piaproUrl)
   console.log(`got response`, { status: mikuReq.status, ok: mikuReq.ok })
   const mikuHtml = await mikuReq.text()
+
+  const result = processHtml(mikuHtml, year)
+
+  await storeCache(cacheKey, result, 5 * 60 * 1000)
+
+  return { ...result, piaproUrl }
+}
+
+export const processHtml = (mikuHtml: string, year: string) => {
   const soup = new JSSoup(mikuHtml)
   const images = soup.find(undefined, 'tmblist_list').contents
   const yearFinalists = metadatabase[year]
 
   const results = images.map((item: SoupTag): MikuResult => {
     const linkElem: SoupTag = item.find('a')
-    const id = (linkElem.attrs['href'] as string)
+    const id = getId(linkElem.attrs['href'] as string)
 
     return {
       name: item.find(undefined, 'tmblist_list_title').text,
@@ -102,10 +121,7 @@ export const processPage = async (
   const result = {
     pageCount: pageCount(soup),
     results,
-    piaproUrl,
   }
-
-  await storeCache(cacheKey, result, 5 * 60 * 1000)
 
   return result
 }

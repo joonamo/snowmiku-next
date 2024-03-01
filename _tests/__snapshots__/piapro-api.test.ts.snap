@@ -1,0 +1,42 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Parses html 1`] = `
+{
+  "pageCount": NaN,
+  "results": [
+    {
+      "author": "user 1",
+      "authorIcon": "//cdn.example.com/icon_u/873/111111_20240229160752_0072.jpg",
+      "image": "//cdn.example.com/thumb_i/hf/aaaaa_20240229153653_0860_0600.png",
+      "isFinalist": false,
+      "isWinner": false,
+      "link": "https://piapro.jp/t/AAAA",
+      "name": "SNOW MIKU a",
+      "postTime": "",
+      "views": 0,
+    },
+    {
+      "author": "user 2",
+      "authorIcon": "//cdn.example.com/icon_u/845/22222_20240223120025_0072.jpg",
+      "image": "//cdn.example.com/thumb_i/eh/bbbbbb_20240229130931_0860_0600.png",
+      "isFinalist": false,
+      "isWinner": false,
+      "link": "https://piapro.jp/t/BBBB",
+      "name": "雪ミク b",
+      "postTime": "",
+      "views": 0,
+    },
+    {
+      "author": "user 3",
+      "authorIcon": "//cdn.example.com/icon_u/449/33333_20240217035936_0072.jpg",
+      "image": "//cdn.example.com/thumb_i/w4/ccccc_20240229063132_0860_0600.png",
+      "isFinalist": false,
+      "isWinner": false,
+      "link": "https://piapro.jp/t/CCCC",
+      "name": "スノーミク c",
+      "postTime": "",
+      "views": 0,
+    },
+  ],
+}
+`;
