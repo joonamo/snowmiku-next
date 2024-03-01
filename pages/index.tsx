@@ -15,7 +15,7 @@ export const getStaticProps: GetStaticProps<AppProps> = async () => {
   const year = configuration.latestYear
   const page = 1
 
-  const { pageCount, results } = await processPage(
+  const { pageCount, results, piaproUrl } = await processPage(
     String(year),
     defaultViewMode === 'Latest' ? latestTag : popularTag,
     page,
@@ -26,6 +26,7 @@ export const getStaticProps: GetStaticProps<AppProps> = async () => {
     configuration,
     currentPage: 1,
     imagesInfos: results,
+    piaproUrl,
     pageCount,
     viewMode: defaultViewMode,
     year: String(year),
