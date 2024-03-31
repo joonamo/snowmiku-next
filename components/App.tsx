@@ -11,6 +11,7 @@ import { defaultViewMode } from './staticConfig'
 import { Titlebar } from './Titlebar'
 import { MikuResult } from '@/src/piapro-api'
 import { ThemeTitle } from './ThemeTitle'
+import { VotingInfo } from './VotingInfo'
 
 export type ViewMode = 'Latest' | 'Popular'
 
@@ -120,6 +121,7 @@ const MikuPage: React.FunctionComponent<AppProps> = ({
       />
       <section className='section pt-2'>
         <div className='container'>
+          <VotingInfo />
           <div className='columns title-columns'>
             <div className='column is-hidden-mobile is-narrow'>
               <h1 className='title'>{pageTitle}</h1>
