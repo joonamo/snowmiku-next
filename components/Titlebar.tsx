@@ -146,7 +146,7 @@ export const Titlebar: React.FunctionComponent<TitlebarProps> = ({
           {officialPage && (
             <a href={officialPage} target='_blank' className='navbar-item'>
               <span>Design Contest</span>
-              <span className='icon'>
+              <span className='icon icon-external-link-container'>
                 <ExternalLink />
               </span>
             </a>
@@ -155,7 +155,7 @@ export const Titlebar: React.FunctionComponent<TitlebarProps> = ({
           {piaproUrl && (
             <a href={piaproUrl} target='_blank' className='navbar-item'>
               <span>Piapro</span>
-              <span className='icon'>
+              <span className='icon icon-external-link-container'>
                 <ExternalLink />
               </span>
             </a>
@@ -163,7 +163,7 @@ export const Titlebar: React.FunctionComponent<TitlebarProps> = ({
 
           <a href='https://snowmiku.com/' target='blank' className='navbar-item'>
             <span>SnowMiku.com</span>
-            <span className='icon'>
+            <span className='icon icon-external-link-container'>
               <ExternalLink />
             </span>
           </a>

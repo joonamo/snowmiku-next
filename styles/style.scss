@@ -141,3 +141,20 @@
 .title-columns {
   align-items: flex-end;
 }
+
+.icon-external-link {
+  fill: #fff;
+  stroke: #fff;
+
+  @media (max-width: 600px) {
+    fill: rgb(74, 74, 74);
+    stroke: rgb(74, 74, 74);
+  }
+}
+
+.icon-external-link-container {
+  @media (max-width: 600px) {
+    width: 1em;
+    height: 1em;
+  }
+}
