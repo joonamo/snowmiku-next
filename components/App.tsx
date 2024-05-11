@@ -11,7 +11,6 @@ import { defaultViewMode } from './staticConfig'
 import { Titlebar } from './Titlebar'
 import { MikuResult } from '@/src/piapro-api'
 import { ThemeTitle } from './ThemeTitle'
-import { VotingInfo } from './VotingInfo'
 
 export type ViewMode = 'Latest' | 'Popular'
 
