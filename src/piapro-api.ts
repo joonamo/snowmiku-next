@@ -71,14 +71,14 @@ export const processPage = async (
   orderTag: string,
   page = 1,
 ): Promise<ResultsPage> => {
-  const cacheKey = `page-result-v8/${year}/${orderTag}/${page}`
+  const cacheKey = `page-result-v9/${year}/${orderTag}/${page}`
   const cached = await getCached<ResultsPage>(cacheKey)
   if (cached.data) {
     return cached.data
   }
 
   const yearTag = getYearTag(year)
-  const piaproUrl = `https://piapro.jp/content_list/?view=image&tag=${yearTag}%E5%B9%B4%E9%9B%AA%E3%83%9F%E3%82%AF%E8%A1%A3%E8%A3%85&order=${orderTag}&page=${page}`
+  const piaproUrl = `https://piapro.jp/content_tag/image/${yearTag}%E5%B9%B4%E9%9B%AA%E3%83%9F%E3%82%AF%E8%A1%A3%E8%A3%85/${page}?order=${orderTag}`
 
   logInfo(`Calling Piapro`, { piaproUrl })
   const mikuReq = await fetch(piaproUrl)
