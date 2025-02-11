@@ -63,7 +63,17 @@ export const paginatorRegex = /new Paginator\('_paginator', ([0-9]*)/
 const pageCount = (page?: SoupTag) => {
   const pager = page?.find(undefined, 'pager_list')
   const last = pager.contents[pager.contents.length - 1]
-  return parseInt(last.text, 10)
+  const firstTry = parseInt(last.text, 10)
+  
+  if (Number.isInteger(firstTry))
+    return firstTry
+  
+  const secondToLast = pager.contents[pager.contents.length - 2]
+  const secondTry = parseInt(secondToLast.text, 10)
+  if (Number.isInteger(secondTry))
+    return secondTry
+
+  return null
 }
 
 export const processPage = async (
@@ -85,7 +95,7 @@ export const processPage = async (
   console.log(`got response`, { status: mikuReq.status, ok: mikuReq.ok })
   const mikuHtml = await mikuReq.text()
 
-  const processed = processHtml(mikuHtml, year)
+  const processed = processHtml(mikuHtml, year, page)
   const result = { ...processed, piaproUrl }
 
   await storeCache(cacheKey, result, 5 * 60 * 1000)
@@ -93,7 +103,7 @@ export const processPage = async (
   return result
 }
 
-export const processHtml = (mikuHtml: string, year: string) => {
+export const processHtml = (mikuHtml: string, year: string, page: number) => {
   const soup = new JSSoup(mikuHtml)
   const images = soup.find(undefined, 'tmblist_list').contents
   const yearFinalists = metadatabase[year]
@@ -120,7 +130,7 @@ export const processHtml = (mikuHtml: string, year: string) => {
   })
 
   const result = {
-    pageCount: pageCount(soup),
+    pageCount: pageCount(soup) ?? page,
     results,
   }
 
