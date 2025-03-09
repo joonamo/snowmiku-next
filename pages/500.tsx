@@ -28,7 +28,6 @@ export const getStaticProps: GetStaticProps<AppProps> = async () => {
     pageCount: 1,
     viewMode: defaultViewMode,
     year: configuration.latestYear.toString(),
-    generatedAt: new Date().toISOString(),
     overrideTitle: 'Server error',
   }
 

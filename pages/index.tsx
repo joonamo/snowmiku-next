@@ -30,7 +30,6 @@ export const getStaticProps: GetStaticProps<AppProps> = async () => {
     pageCount,
     viewMode: defaultViewMode,
     year: String(year),
-    generatedAt: new Date().toISOString(),
     ...(metaEntry
       ? {
           officialPage: metaEntry.officialPage,

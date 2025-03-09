@@ -58,7 +58,6 @@ export const getStaticPropsBase: GetStaticProps<AppProps, YearQuery> = async (qu
     pageCount,
     viewMode,
     year: String(year),
-    generatedAt: new Date().toISOString(),
     officialPage: metaEntry?.officialPage ?? null,
     theme: metaEntry?.theme ?? null,
     themeTranslated: metaEntry?.themeTranslated ?? null,
