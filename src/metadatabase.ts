@@ -16,7 +16,7 @@ export const metadatabase: Record<string, YearMetadata> = {
     finalists: ['A9PY', 'OLE7', 'ygP5', 'SewP', 'wKbd', 'N2Qg'],
     officialPage: 'https://piapro.jp/pages/official_collabo/2026snowmiku_c3hev/',
     theme: ['しあわせ', 'パティスリー'],
-    themeTranslated: 'Happy Pâtisserie',
+    themeTranslated: 'Pâtisserie of Happiness',
   },
   '2025': {
     winner: 'qyUN',
