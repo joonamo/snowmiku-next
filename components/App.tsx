@@ -3,6 +3,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import * as React from 'react'
 
+import { VotingInfo } from './VotingInfo'
 import { Disclaimer } from './Disclaimer'
 import { Paginator } from './Paginator'
 import { Ribbon } from './Ribbon'
