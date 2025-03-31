@@ -120,7 +120,7 @@ const MikuPage: React.FunctionComponent<AppProps> = ({
       />
       <section className='section pt-2'>
         <div className='container'>
-          {<VotingInfo />
+          <VotingInfo />
           <div className='columns title-columns'>
             <div className='column is-hidden-mobile is-narrow'>
               <h1 className='title'>{pageTitle}</h1>
