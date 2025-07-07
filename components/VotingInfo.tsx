@@ -1,6 +1,8 @@
 import * as React from 'react'
 
-export const VotingInfo = () => (
+export const VotingInfoUnused = () => null
+
+export const VotingInfoUnused = () => (
   <div className='card has-background-danger-light has-text-light mb-5'>
     <div className='card-content'>
       <p className='subtitle has-text-centered'>
