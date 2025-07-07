@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-export const VotingInfoUnused = () => null
+export const VotingInfo = () => null
 
 export const VotingInfoUnused = () => (
   <div className='card has-background-danger-light has-text-light mb-5'>
