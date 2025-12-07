@@ -31,7 +31,6 @@ const ResultSkeleton: React.FunctionComponent = () => (
             <figure className='image is-48x48 skeleton is-circle' />
           </div>
           <div className='media-content'>
-            <p className='title is-5 skeleton skeleton-reverse'>{' '}</p>
             <p className='subtitle is-5 skeleton mb-1'>{' '}</p>
             <p className='subtitle is-7 skeleton skeleton-reverse'>{' '}</p>
           </div>
