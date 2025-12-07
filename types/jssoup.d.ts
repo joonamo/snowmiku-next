@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 declare module "jssoup" {
   export class SoupElement {
     constructor(parent?: any, previousElement?: any, nextElement?: any);

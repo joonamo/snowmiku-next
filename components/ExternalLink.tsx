@@ -1,10 +1,7 @@
 import * as React from 'react'
 import { SVGProps } from 'react'
 
-interface Props {
-}
-
-export const ExternalLink: React.FC<SVGProps<SVGSVGElement> & Props> = (props) => {
+export const ExternalLink: React.FC<SVGProps<SVGSVGElement>> = (props) => {
   
   return (
     <svg
