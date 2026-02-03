@@ -1,6 +1,6 @@
 import JSSoup, { SoupTag } from 'jssoup'
 import { getCached, storeCache } from './cache'
-import { logInfo } from './logger'
+import { logInfo, logError } from './logger'
 import { metadatabase } from './metadatabase'
 import { randomUUID } from 'node:crypto'
 
@@ -139,7 +139,7 @@ export const processHtml = (mikuHtml: string, year: string, page: number) => {
   }
   catch (e: any)
   {
-    logInfo(`Failed to process year ${year} page ${page}`, e)
+    logError(`Failed to process page`, {year, page}, e)
     return {
       pageCount: 0,
       results: []
