@@ -92,7 +92,7 @@ export const processPage = async (
 
   logInfo(`Calling Piapro`, { piaproUrl })
   const mikuReq = await fetch(piaproUrl)
-  console.log(`got response`, { status: mikuReq.status, ok: mikuReq.ok })
+  logInfo(`got response`, { status: mikuReq.status, ok: mikuReq.ok })
   const mikuHtml = await mikuReq.text()
 
   const processed = processHtml(mikuHtml, year, page)
