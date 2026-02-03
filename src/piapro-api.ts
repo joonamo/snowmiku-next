@@ -104,37 +104,47 @@ export const processPage = async (
 }
 
 export const processHtml = (mikuHtml: string, year: string, page: number) => {
-  const soup = new JSSoup(mikuHtml)
-  const images = soup.find(undefined, 'tmblist_list').contents
-  const yearFinalists = metadatabase[year]
+  try {
+    const soup = new JSSoup(mikuHtml)
+    const images = soup.find(undefined, 'tmblist_list').contents
+    const yearFinalists = metadatabase[year]
 
-  const results = images.map((item: SoupTag): MikuResult => {
-    const linkElem: SoupTag = item.find('a')
-    const id = getId(linkElem.attrs['href'] as string)
+    const results = images.map((item: SoupTag): MikuResult => {
+      const linkElem: SoupTag = item.find('a')
+      const id = getId(linkElem.attrs['href'] as string)
 
-    return {
-      name: item.find(undefined, 'tmblist_list_title').text,
-      author: item.find(undefined, 'tmblist_list_creator_txt').text,
-      authorIcon:
-        item.find(undefined, 'tmblist_list_creator_userimg')?.find('img').attrs['src'].replace('_0048.', '_0150.') ??
-        null,
-      image: item.find(undefined, 'tmblist_list_tmb_inner')?.find('img').attrs['src'].replace('0250_0250.', '0860_0600.'),
-      link: `https://piapro.jp/t/${id}`,
-      isFinalist: Boolean(yearFinalists?.finalists?.includes(id)),
-      isWinner: yearFinalists?.winner === id,
+      return {
+        name: item.find(undefined, 'tmblist_list_title').text,
+        author: item.find(undefined, 'tmblist_list_creator_txt').text,
+        authorIcon:
+          item.find(undefined, 'tmblist_list_creator_userimg')?.find('img').attrs['src'].replace('_0048.', '_0150.') ??
+          null,
+        image: item.find(undefined, 'tmblist_list_tmb_inner')?.find('img').attrs['src'].replace('0250_0250.', '0860_0600.'),
+        link: `https://piapro.jp/t/${id}`,
+        isFinalist: Boolean(yearFinalists?.finalists?.includes(id)),
+        isWinner: yearFinalists?.winner === id,
 
-      // Views and post time not available in current Piapro listing
-      views: 0,
-      postTime: '',
+        // Views and post time not available in current Piapro listing
+        views: 0,
+        postTime: '',
+      }
+    })
+
+    const result = {
+      pageCount: pageCount(soup) ?? page,
+      results,
     }
-  })
 
-  const result = {
-    pageCount: pageCount(soup) ?? page,
-    results,
+    return result
   }
-
-  return result
+  catch (e: any)
+  {
+    logInfo("Failed to process year ${year} page ${page}", e)
+    return {
+      pageCount: 0,
+      results: []
+    }
+  }
 }
 
 export const getLatestYear = async (): Promise<number> => {
