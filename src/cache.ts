@@ -48,7 +48,7 @@ export const getCached = async <T>(key: string, allowStale = false): Promise<cac
   const cachedObject: CachedObject<T> = JSON.parse(cachedString)
   const stale = new Date().getTime() > cachedObject.validUntil
   if (!stale || allowStale) {
-    console.log('Cache hit', { key, stale })
+    logInfo('Cache hit', { key, stale })
     return {
       ...cachedObject,
       stale,
