@@ -139,7 +139,7 @@ export const processHtml = (mikuHtml: string, year: string, page: number) => {
   }
   catch (e: any)
   {
-    logInfo("Failed to process year ${year} page ${page}", e)
+    logInfo(`Failed to process year ${year} page ${page}`, e)
     return {
       pageCount: 0,
       results: []
