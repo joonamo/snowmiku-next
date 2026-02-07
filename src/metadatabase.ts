@@ -16,7 +16,7 @@ export const metadatabase: Record<string, YearMetadata> = {
     finalists: [],
     officialPage: undefined,
     theme: ['ひみつの☆', 'めたもる'],
-    themeTranslated: 'Secret☆​Metamorph',
+    themeTranslated: 'Secret☆​Metamorphosis',
   },
   '2026': {
     winner: 'wKbd',
