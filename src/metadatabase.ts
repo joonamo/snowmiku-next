@@ -11,6 +11,13 @@ export const defaultThemeTranslated = 'Snow Miku'
 
 // Look at this fancy database!
 export const metadatabase: Record<string, YearMetadata> = {
+  '2027': {
+    winner: undefined,
+    finalists: [],
+    officialPage: undefined,
+    theme: ['ひみつの☆', 'めたもる'],
+    themeTranslated: 'Secret☆​Metamorph',
+  },
   '2026': {
     winner: 'wKbd',
     finalists: ['A9PY', 'OLE7', 'ygP5', 'SewP', 'wKbd', 'N2Qg'],
