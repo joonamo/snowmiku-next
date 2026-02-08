@@ -14,7 +14,7 @@ export const metadatabase: Record<string, YearMetadata> = {
   '2027': {
     winner: undefined,
     finalists: [],
-    officialPage: undefined,
+    officialPage: 'https://piapro.jp/pages/official_collabo/2027snowmiku_r7xnm/',
     theme: ['ひみつの☆', 'めたもる'],
     themeTranslated: 'Secret☆​Metamorphosis',
   },
