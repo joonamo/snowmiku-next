@@ -61,17 +61,23 @@ const getId = (href?: string) => {
 
 export const paginatorRegex = /new Paginator\('_paginator', ([0-9]*)/
 const pageCount = (page?: SoupTag) => {
-  const pager = page?.find(undefined, 'pager_list')
-  const last = pager.contents[pager.contents.length - 1]
-  const firstTry = parseInt(last.text, 10)
-  
-  if (Number.isInteger(firstTry))
-    return firstTry
-  
-  const secondToLast = pager.contents[pager.contents.length - 2]
-  const secondTry = parseInt(secondToLast.text, 10)
-  if (Number.isInteger(secondTry))
-    return secondTry
+  try {
+    const pager = page?.find(undefined, 'pager_list')
+    const last = pager.contents[pager.contents.length - 1]
+    const firstTry = parseInt(last.text, 10)
+    
+    if (Number.isInteger(firstTry))
+      return firstTry
+    
+    const secondToLast = pager.contents[pager.contents.length - 2]
+    const secondTry = parseInt(secondToLast.text, 10)
+    if (Number.isInteger(secondTry))
+      return secondTry
+  }
+  catch (e: any)
+  {
+    logError(`Failed to read pagecount`, {}, e)
+  }
 
   return null
 }
