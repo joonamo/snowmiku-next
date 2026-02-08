@@ -87,7 +87,7 @@ export const processPage = async (
   orderTag: string,
   page = 1,
 ): Promise<ResultsPage> => {
-  const cacheKey = `page-result-v10/${year}/${orderTag}/${page}`
+  const cacheKey = `page-result-v11/${year}/${orderTag}/${page}`
   const cached = await getCached<ResultsPage>(cacheKey)
   if (cached.data) {
     return cached.data
@@ -154,7 +154,7 @@ export const processHtml = (mikuHtml: string, year: string, page: number) => {
 }
 
 export const getLatestYear = async (): Promise<number> => {
-  const cacheKey = 'latestYear'
+  const cacheKey = 'latestYear-v2'
   const cached = await getCached<{ latestYear: number }>(cacheKey, true)
   if (cached.data?.latestYear && !cached.stale) {
     return cached.data.latestYear

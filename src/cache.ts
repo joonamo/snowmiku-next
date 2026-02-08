@@ -68,6 +68,7 @@ export const storeCache = async (key: string, data: unknown, lifetimeMillis: num
       Key: key,
       Body: JSON.stringify({ data, validUntil: Expires.getTime() }),
       Expires,
+      ContentType: "application/json"
     }),
   )
 }
