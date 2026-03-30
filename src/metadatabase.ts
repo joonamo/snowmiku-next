@@ -13,7 +13,7 @@ export const defaultThemeTranslated = 'Snow Miku'
 export const metadatabase: Record<string, YearMetadata> = {
   '2027': {
     winner: undefined,
-    finalists: [],
+    finalists: ['ylmS', 'jhbO', '2k6u', '0eIC', 'EMO2', '0aYC'],
     officialPage: 'https://piapro.jp/pages/official_collabo/2027snowmiku_r7xnm/',
     theme: ['ひみつの☆', 'めたもる'],
     themeTranslated: 'Secret☆​Metamorphosis',
