@@ -3,7 +3,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import * as React from 'react'
 
-import { VotingInfo } from './VotingInfo'
+// import { VotingInfo } from './VotingInfo'
 import { Disclaimer } from './Disclaimer'
 import { Paginator } from './Paginator'
 import { Ribbon } from './Ribbon'
@@ -121,7 +121,7 @@ const MikuPage: React.FunctionComponent<AppProps> = ({
       />
       <section className='section pt-2'>
         <div className='container'>
-          <VotingInfo />
+          {/*<VotingInfo />*/}
           <div className='columns title-columns'>
             <div className='column is-hidden-mobile is-narrow'>
               <h1 className='title'>{pageTitle}</h1>
