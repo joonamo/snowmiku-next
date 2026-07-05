@@ -12,7 +12,7 @@ export const defaultThemeTranslated = 'Snow Miku'
 // Look at this fancy database!
 export const metadatabase: Record<string, YearMetadata> = {
   '2027': {
-    winner: undefined,
+    winner: '0eIC',
     finalists: ['ylmS', 'jhbO', '2k6u', '0eIC', 'EMO2', '0aYC'],
     officialPage: 'https://piapro.jp/pages/official_collabo/2027snowmiku_r7xnm/',
     theme: ['ひみつの☆', 'めたもる'],
